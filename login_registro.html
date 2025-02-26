@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Bootstrap demo</title>
+    <title>Login</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -14,11 +14,8 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
     />
-    <link
-      rel="stylesheet"
-      href="https://unicons.iconscout.com/release/v2.1.9/css/unicons.css"
-    />
-    <link rel="stylesheet" href="./assets/style.css" />
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.9/css/unicons.css" />
+    <link rel="stylesheet" href="./assets/css/style.css" />
   </head>
   <body>
     <div class="section">
@@ -26,15 +23,8 @@
         <div class="row full-height justify-content-center">
           <div class="col-12 text-center align-self-center py-5">
             <div class="section pb-5 pt-5 pt-sm-2 text-center">
-              <h6 class="mb-0 pb-3">
-                <span>Log In </span><span>Sign Up</span>
-              </h6>
-              <input
-                class="checkbox"
-                type="checkbox"
-                id="reg-log"
-                name="reg-log"
-              />
+              <h6 class="mb-0 pb-3"><span>Log In </span><span>Sign Up</span></h6>
+              <input class="checkbox" type="checkbox" id="reg-log" name="reg-log" />
               <label for="reg-log"></label>
               <div class="card-3d-wrap mx-auto">
                 <div class="card-3d-wrapper">
@@ -42,29 +32,33 @@
                     <div class="center-wrap">
                       <div class="section text-center">
                         <h4 class="mb-4 pb-3">Log In</h4>
-                        <div class="form-group">
-                          <input
-                            type="email"
-                            name="logemail"
-                            class="form-style"
-                            placeholder="Your Email"
-                            id="logemail"
-                            autocomplete="off"
-                          />
-                          <i class="input-icon uil uil-at"></i>
-                        </div>
-                        <div class="form-group mt-2">
-                          <input
-                            type="password"
-                            name="logpass"
-                            class="form-style"
-                            placeholder="Your Password"
-                            id="logpass"
-                            autocomplete="off"
-                          />
-                          <i class="input-icon uil uil-lock-alt"></i>
-                        </div>
-                        <a href="#" class="btn mt-4">submit</a>
+                        <form id="frmLogin" data-tipo="login">
+                          <div class="form-group">
+                            <input
+                              type="text"
+                              name="logemail"
+                              class="form-style"
+                              placeholder="Your Email"
+                              id="userName"
+                              autocomplete="off"
+                              required
+                            />
+                            <i class="input-icon uil uil-user"></i>
+                          </div>
+                          <div class="form-group mt-2">
+                            <input
+                              type="password"
+                              name="logpass"
+                              class="form-style"
+                              placeholder="Your Password"
+                              id="userPass"
+                              autocomplete="off"
+                              required
+                            />
+                            <i class="input-icon uil uil-lock-alt"></i>
+                          </div>
+                          <button type="submit" class="btn mt-4">Enviar</button>
+                        </form>
                         <p class="mb-0 mt-4 text-center">
                           <a href="#0" class="link">Forgot your password?</a>
                         </p>
@@ -75,40 +69,162 @@
                     <div class="center-wrap">
                       <div class="section text-center">
                         <h4 class="mb-4 pb-3">Sign Up</h4>
-                        <div class="form-group">
-                          <input
-                            type="text"
-                            name="logname"
-                            class="form-style"
-                            placeholder="Your Full Name"
-                            id="logname"
-                            autocomplete="off"
-                          />
-                          <i class="input-icon uil uil-user"></i>
-                        </div>
-                        <div class="form-group mt-2">
-                          <input
-                            type="email"
-                            name="logemail"
-                            class="form-style"
-                            placeholder="Your Email"
-                            id="logemail"
-                            autocomplete="off"
-                          />
-                          <i class="input-icon uil uil-at"></i>
-                        </div>
-                        <div class="form-group mt-2">
-                          <input
-                            type="password"
-                            name="logpass"
-                            class="form-style"
-                            placeholder="Your Password"
-                            id="logpass"
-                            autocomplete="off"
-                          />
-                          <i class="input-icon uil uil-lock-alt"></i>
-                        </div>
-                        <a href="#" class="btn mt-4">submit</a>
+
+                        <form id="frmRegister" data-tipo="register">
+                          <div class="form-group">
+                            <input
+                              type="text"
+                              name="logname"
+                              class="form-style"
+                              placeholder="Your Name User"
+                              id="regUserName"
+                              autocomplete="off"
+                              required
+                            />
+                            <i class="input-icon uil uil-user"></i>
+                          </div>
+                          <div class="form-group mt-2">
+                            <input
+                              type="email"
+                              name="logemail"
+                              class="form-style"
+                              placeholder="Your Email"
+                              id="regUserEmail"
+                              autocomplete="off"
+                              required
+                            />
+                            <i class="input-icon uil uil-at"></i>
+                          </div>
+                          <div class="form-group mt-2">
+                            <input
+                              type="password"
+                              name="logpass"
+                              class="form-style"
+                              placeholder="Your Password"
+                              id="regUserPass"
+                              autocomplete="off"
+                              required
+                            />
+                            <i class="input-icon uil uil-lock-alt"></i>
+                          </div>
+                          <div class="form-group mt-2">
+                            <select
+                              class="form-select form-style"
+                              id="regPaisUser"
+                              aria-describedby="validationServer04Feedback"
+                              required
+                            >
+                              <option selected disabled value="">Your Coutry...</option>
+                              <option>...</option>
+                              <option value="Afganistán">Afganistán</option>
+                              <option value="Albania">Albania</option>
+                              <option value="Alemania">Alemania</option>
+                              <option value="Andorra">Andorra</option>
+                              <option value="Angola">Angola</option>
+                              <option value="Antigua y Barbuda">Antigua y Barbuda</option>
+                              <option value="Arabia Saudita">Arabia Saudita</option>
+                              <option value="Argelia">Argelia</option>
+                              <option value="Argentina">Argentina</option>
+                              <option value="Armenia">Armenia</option>
+                              <option value="Australia">Australia</option>
+                              <option value="Austria">Austria</option>
+                              <option value="Azerbaiyán">Azerbaiyán</option>
+                              <option value="Bahamas">Bahamas</option>
+                              <option value="Bangladés">Bangladés</option>
+                              <option value="Baréin">Baréin</option>
+                              <option value="Barbados">Barbados</option>
+                              <option value="Belarús">Belarús</option>
+                              <option value="Bélgica">Bélgica</option>
+                              <option value="Belice">Belice</option>
+                              <option value="Benín">Benín</option>
+                              <option value="Bután">Bután</option>
+                              <option value="Bolivia">Bolivia</option>
+                              <option value="Bosnia y Herzegovina">Bosnia y Herzegovina</option>
+                              <option value="Botsuana">Botsuana</option>
+                              <option value="Brasil">Brasil</option>
+                              <option value="Brunéi">Brunéi</option>
+                              <option value="Bulgaria">Bulgaria</option>
+                              <option value="Burkina Faso">Burkina Faso</option>
+                              <option value="Burundi">Burundi</option>
+                              <option value="Cabo Verde">Cabo Verde</option>
+                              <option value="Camboya">Camboya</option>
+                              <option value="Camerún">Camerún</option>
+                              <option value="Canadá">Canadá</option>
+                              <option value="Catar">Catar</option>
+                              <option value="Chad">Chad</option>
+                              <option value="Chile">Chile</option>
+                              <option value="China">China</option>
+                              <option value="Chipre">Chipre</option>
+                              <option value="Colombia">Colombia</option>
+                              <option value="Comoras">Comoras</option>
+                              <option value="Corea del Norte">Corea del Norte</option>
+                              <option value="Corea del Sur">Corea del Sur</option>
+                              <option value="Costa de Marfil">Costa de Marfil</option>
+                              <option value="Costa Rica">Costa Rica</option>
+                              <option value="Croacia">Croacia</option>
+                              <option value="Cuba">Cuba</option>
+                              <option value="Dinamarca">Dinamarca</option>
+                              <option value="Dominica">Dominica</option>
+                              <option value="Ecuador">Ecuador</option>
+                              <option value="Egipto">Egipto</option>
+                              <option value="El Salvador">El Salvador</option>
+                              <option value="Emiratos Árabes Unidos">Emiratos Árabes Unidos</option>
+                              <option value="Eritrea">Eritrea</option>
+                              <option value="Eslovaquia">Eslovaquia</option>
+                              <option value="Eslovenia">Eslovenia</option>
+                              <option value="España">España</option>
+                              <option value="Estados Unidos">Estados Unidos</option>
+                              <option value="Estonia">Estonia</option>
+                              <option value="Esuatini">Esuatini</option>
+                              <option value="Etiopía">Etiopía</option>
+                              <option value="Filipinas">Filipinas</option>
+                              <option value="Finlandia">Finlandia</option>
+                              <option value="Fiyi">Fiyi</option>
+                              <option value="Francia">Francia</option>
+                              <option value="Gabón">Gabón</option>
+                              <option value="Gambia">Gambia</option>
+                              <option value="Georgia">Georgia</option>
+                              <option value="Ghana">Ghana</option>
+                              <option value="Granada">Granada</option>
+                              <option value="Grecia">Grecia</option>
+                              <option value="Guatemala">Guatemala</option>
+                              <option value="Guinea">Guinea</option>
+                              <option value="Guinea-Bisáu">Guinea-Bisáu</option>
+                              <option value="Guinea Ecuatorial">Guinea Ecuatorial</option>
+                              <option value="Guyana">Guyana</option>
+                              <option value="Haití">Haití</option>
+                              <option value="Honduras">Honduras</option>
+                              <option value="Hungría">Hungría</option>
+                              <option value="India">India</option>
+                              <option value="Indonesia">Indonesia</option>
+                              <option value="Irak">Irak</option>
+                              <option value="Irán">Irán</option>
+                              <option value="Irlanda">Irlanda</option>
+                              <option value="Islandia">Islandia</option>
+                              <option value="Israel">Israel</option>
+                              <option value="Italia">Italia</option>
+                              <option value="Jamaica">Jamaica</option>
+                              <option value="Japón">Japón</option>
+                              <option value="Jordania">Jordania</option>
+                              <option value="Kazajistán">Kazajistán</option>
+                              <option value="Kenia">Kenia</option>
+                              <option value="Kirguistán">Kirguistán</option>
+                              <option value="Kiribati">Kiribati</option>
+                              <option value="Kuwait">Kuwait</option>
+                              <option value="Laos">Laos</option>
+                              <option value="Lesoto">Lesoto</option>
+                              <option value="Letonia">Letonia</option>
+                              <option value="Líbano">Líbano</option>
+                              <option value="Liberia">Liberia</option>
+                              <option value="Libia">Libia</option>
+                              <option value="Liechtenstein">Liechtenstein</option>
+                              <option value="Lituania">Lituania</option>
+                              <option value="Luxemburgo">Luxemburgo</option>
+                            </select>
+                            <i class="input-icon uil uil-lock-alt"></i>
+                          </div>
+                          <button type="submit" class="btn mt-4">Enviar</button>
+                        </form>
                       </div>
                     </div>
                   </div>
@@ -124,5 +240,7 @@
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"
     ></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="/assets/js/login.js"></script>
   </body>
 </html>
