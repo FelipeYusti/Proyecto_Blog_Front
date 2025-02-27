@@ -56,7 +56,7 @@ document.getElementById("frmPost").addEventListener("submit", function (event) {
       if (res) {
         Swal.fire({
           position: "top",
-          title: "Se publico correctamente!",
+          title: "Se publico correctamente el post!",
           icon: "success",
           text: res.mensaje,
           showConfirmButton: false,
