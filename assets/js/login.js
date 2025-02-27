@@ -25,6 +25,7 @@ frmLogin.addEventListener("submit", (e) => {
       .then((res) => res.json())
       .then((res) => {
         if (res) {
+          sessionStorage.setItem("userName", res.user);
           window.location.href = "index.html";
         } else {
           Swal.fire({
@@ -41,7 +42,7 @@ frmRegister.addEventListener("submit", (e) => {
   let accion = e.target.closest("form").getAttribute("data-tipo");
 
   if (accion === "register") {
-    if (validarInputs(regUserName.value, email.value, regPassword.value, pais)) {
+    if (validarInputs(regUserName.value, email.value, regPassword.value, pais.value) === true) {
       fetch(api + "newUser", {
         method: "POST",
         headers: {
@@ -88,7 +89,11 @@ frmRegister.addEventListener("submit", (e) => {
 });
 
 function validarInputs(user, email, password, pais) {
-  if (!user && !email && !password && !pais) {
+  console.log(user);
+  console.log(email);
+  console.log(password);
+  console.log(pais);
+  if (user.length > 0 && email.length > 0 && password.length > 0 && pais.length > 0) {
     if (user.length >= 4) {
       return true;
     }
