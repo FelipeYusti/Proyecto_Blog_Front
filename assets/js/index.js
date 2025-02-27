@@ -25,3 +25,51 @@ document.getElementById("read-more-btn").addEventListener("click", function () {
     this.textContent = "Leer más";
   }
 });
+document.getElementById("frmPost").addEventListener("submit", function (event) {
+  event.preventDefault();
+  const fecha = new Date();
+  const options = {
+    year: "numeric", // Año
+    month: "long", // Mes
+    day: "numeric" // Dia
+  };
+  const fechaPublicacion = fecha.toLocaleDateString(undefined, options);
+  const titulo = document.querySelector("#postTitle").value;
+  const contentenido = document.querySelector("#postContent").value;
+  const image = document.querySelector("#postImage").value;
+
+  fetch(api + "nuevaPublicacion", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      autor_id: autor_id.value,
+      titulo: titulo.value.trim(),
+      rutImagen: image.value,
+      contenido_publicacion: contentenido.value,
+      fecha_publicacion: fechaPublicacion
+    })
+  })
+    .then((res) => res.json())
+    .then((res) => {
+      if (res) {
+        Swal.fire({
+          position: "top",
+          title: "Se publico correctamente!",
+          icon: "success",
+          text: res.mensaje,
+          showConfirmButton: false,
+          timer: 1500
+        });
+      } else {
+        Swal.fire({
+          title: "Error!",
+          icon: "error",
+          text: res.mensaje
+        });
+      }
+    });
+  document.getElementById("frmPost").reset();
+  bootstrap.Modal.getInstance(document.getElementById("addPostModal")).hide();
+});
