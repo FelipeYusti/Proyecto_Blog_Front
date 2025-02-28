@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 let nameUser = document.querySelector("#NOSES");
 const api = "http://127.0.0.1:4000/api/publicaciones/"; // nos conectamos a la API
 // FORMULARIO DE LA PUBLICACION O POST
@@ -18,8 +17,7 @@ document.getElementById("frmPost").addEventListener("submit", function (event) {
   const image = document.querySelector("#postImage");
   // traemos el id del usuario que esta almacenado en el sesionStorage.
   const sesion = JSON.parse(sessionStorage.getItem("userName"));
-
-=======
+});
 // FORMULARIO DE LA PUBLICACION O POST
 
 document.getElementById("frmPost").addEventListener("submit", function (event) {
@@ -36,23 +34,16 @@ document.getElementById("frmPost").addEventListener("submit", function (event) {
   const contentenido = document.querySelector("#postContent").value;
   const image = document.querySelector("#postImage").value;
 
->>>>>>> salazar
   fetch(api + "nuevaPublicacion", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-<<<<<<< HEAD
       autor_id: sesion.user_id,
       titulo: titulo.value,
       rutImagen: image.value,
       categoria: categories.value,
-=======
-      autor_id: autor_id.value,
-      titulo: titulo.value.trim(),
-      rutImagen: image.value,
->>>>>>> salazar
       contenido_publicacion: contentenido.value,
       fecha_publicacion: fechaPublicacion,
     }),
@@ -76,26 +67,10 @@ document.getElementById("frmPost").addEventListener("submit", function (event) {
         });
       }
     });
-<<<<<<< HEAD
   // document.getElementById("frmPost").reset();
-=======
-  document.getElementById("frmPost").reset();
->>>>>>> salazar
   bootstrap.Modal.getInstance(document.getElementById("addPostModal")).hide();
 });
 // Mostrar/Ocultar comentarios
-document
-  .getElementById("toggle-comments-btn")
-  .addEventListener("click", function () {
-    let commentList = document.getElementById("comment-list");
-    if (commentList.style.display === "none") {
-      commentList.style.display = "block";
-      this.textContent = "Ocultar comentarios";
-    } else {
-      commentList.style.display = "none";
-      this.textContent = "Mostrar comentarios";
-    }
-  });
 
 // Funcionalidad del botón "Leer más"
 document.getElementById("read-more-btn").addEventListener("click", function () {
@@ -115,8 +90,3 @@ document.getElementById("read-more-btn").addEventListener("click", function () {
     this.textContent = "Leer más";
   }
 });
-<<<<<<< HEAD
-=======
-let usuario = sessionStorage.getItem("userName");
-console.log(usuario);
->>>>>>> salazar
