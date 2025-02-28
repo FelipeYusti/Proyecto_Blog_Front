@@ -24,7 +24,6 @@ frmLogin.addEventListener("submit", (e) => {
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log(res.infoUser);
         if (res.estado === true) {
           sessionStorage.setItem("userName", JSON.stringify(res.infoUser));
            window.location.href = "index.html";
