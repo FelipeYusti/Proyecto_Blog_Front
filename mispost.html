@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blog Deportivo</title>
+    <!-- Vincular Bootstrap 5 -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./assets/css/styleIndex.css" />
+  </head>
+
+  <body>
+    <!-- Cabecera con menú de usuario -->
+    <header class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+      <div class="container">
+        <a class="navbar-brand fw-bold" href="#">🏆 Blog Deportivo</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav mx-auto">
+            <li class="nav-item">
+              <a class="nav-link active" href="#"><i class="fa-solid fa-home"></i> Inicio</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#"><i class="fa-solid fa-futbol"></i> Fútbol</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#"
+                ><i class="fa-solid fa-basketball-ball"></i> Baloncesto</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#"><i class="fa-solid fa-running"></i> Atletismo</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#"><i class="fa-solid fa-table-tennis"></i> Tenis</a>
+            </li>
+          </ul>
+
+          <!-- Menú de usuario mejorado -->
+          <div class="dropdown user-menu">
+            <button
+              class="btn btn-light dropdown-toggle d-flex align-items-center gap-2"
+              type="button"
+              data-bs-toggle="dropdown"
+            >
+              <img
+                src="https://previews.123rf.com/images/yupiramos/yupiramos1705/yupiramos170514716/77987175-dise%C3%B1o-gr%C3%A1fico-del-ejemplo-del-vector-del-icono-del-perfil-del-hombre-joven.jpg"
+                alt="Usuario"
+                class="rounded-circle"
+              />
+              <span id="nameUser"></span>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li>
+                <a class="dropdown-item" href="#"><i class="bi bi-person-fill"></i> Perfil</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="#"><i class="bi bi-archive"></i> Mis posts</a>
+              </li>
+              <li>
+                <a class="dropdown-item text-danger" id="btnCerrarSesion" href="#"
+                  ><i class="bi bi-box-arrow-in-left"></i> Sing Out
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Sección principal -->
+    <section class="container py-5">
+      <div class="row">
+        <!-- Artículos -->
+        <div class="col-md-8">
+          <div class="search-bar mb-4">
+            <label for="search-posts" class="sr-only">Buscar posts</label>
+            <input
+              type="text"
+              placeholder="Buscar mis posts..."
+              id="search-posts"
+              class="form-control"
+            />
+          </div>
+
+          <div class="filters mb-4">
+            <button class="btn btn-info filter-button" id="filter-date">Por fecha</button>
+            <button class="btn btn-info filter-button" id="filter-title">Por título</button>
+          </div>
+
+          <!-- Posts -->
+
+          <div class="posts-list"></div>
+        </div>
+
+        <!-- Barra lateral -->
+        <div class="col-md-4">
+          <div class="sidebar p-3 bg-light rounded">
+            <h5 class="mb-3">Categorías</h5>
+            <div class="row g-2">
+              <!-- Categoría Fútbol -->
+              <div class="col-6">
+                <a href="#" class="category-card">
+                  <div class="category-content">
+                    <img
+                      src="https://images.emojiterra.com/openmoji/v13.1/512px/26bd.png"
+                      alt="Fútbol"
+                    />
+                    <span>Fútbol</span>
+                  </div>
+                </a>
+              </div>
+              <!-- Categoría Baloncesto -->
+              <div class="col-6">
+                <a href="#" class="category-card">
+                  <div class="category-content">
+                    <img
+                      src="https://cdn-icons-png.flaticon.com/512/4354/4354908.png"
+                      alt="Baloncesto"
+                    />
+                    <span>Baloncesto</span>
+                  </div>
+                </a>
+              </div>
+              <!-- Categoría Atletismo -->
+              <div class="col-6">
+                <a href="#" class="category-card">
+                  <div class="category-content">
+                    <img
+                      src="https://cdn-icons-png.flaticon.com/512/2262/2262929.png"
+                      alt="Atletismo"
+                    />
+                    <span>Atletismo</span>
+                  </div>
+                </a>
+              </div>
+              <!-- Categoría Tenis -->
+              <div class="col-6">
+                <a href="#" class="category-card">
+                  <div class="category-content">
+                    <img
+                      src="https://cdn-icons-png.flaticon.com/512/5210/5210328.png"
+                      alt="Tenis"
+                    />
+                    <span>Tenis</span>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pie de página -->
+    <footer class="footer bg-dark text-white text-center py-3">
+      <p>&copy; 2025 Blog Deportivo. Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const searchInput = document.getElementById("search-posts");
+        const postsList = document.querySelector(".posts-list");
+
+        // Datos de posts simulados
+        let posts = [
+          {
+            id: 1,
+            title: "Mi primer post",
+            excerpt: "Este es el contenido de mi primer post",
+            image:
+              "https://universidadeuropea.com/resources/media/images/241009-master-alto-rendimiento-dep.2e16d0ba.fill-767x384.jpg"
+          },
+          {
+            id: 2,
+            title: "Mi segundo post",
+            excerpt: "Aquí hablo sobre algo interesante",
+            image:
+              "https://universidadeuropea.com/resources/media/images/241009-master-alto-rendimiento-dep.2e16d0ba.fill-767x384.jpg"
+          }
+        ];
+
+        // Renderiza los posts en la interfaz
+        function displayPosts(filteredPosts) {
+          postsList.innerHTML = "";
+          filteredPosts.forEach((post) => {
+            const postCard = document.createElement("div");
+            postCard.classList.add("post-card");
+            postCard.setAttribute("class", "article card mb-4 shadow-sm");
+            postCard.innerHTML = `
+            <img src="${post.image}" alt="Imagen de ${post.title}" class="post-image"/>
+            <div class="post-details">
+              <h3 class="post-title">${post.title}</h3>
+              <p class="post-excerpt">${post.excerpt}</p>
+            </div>
+            <div class="post-actions">
+              <button class="btn btn-success view-button" data-id="${post.id}">Ver</button>
+              <button class="btn btn-warning edit-button" data-id="${post.id}">Editar</button>
+              <button class="btn btn-danger delete-button" data-id="${post.id}">Eliminar</button>
+            </div>
+          `;
+            postsList.appendChild(postCard);
+          });
+          attachEventListeners();
+        }
+
+        // Filtros de búsqueda
+        searchInput.addEventListener("input", function () {
+          const query = searchInput.value.toLowerCase();
+          const filteredPosts = posts.filter((post) => post.title.toLowerCase().includes(query));
+          displayPosts(filteredPosts);
+        });
+
+        // Eventos para los botones de acción
+        function attachEventListeners() {
+          document.querySelectorAll(".view-button").forEach((button) => {
+            button.addEventListener("click", function () {
+              alert(`Ver post ${this.dataset.id}`);
+            });
+          });
+
+          document.querySelectorAll(".edit-button").forEach((button) => {
+            button.addEventListener("click", function () {
+              alert(`Editar post ${this.dataset.id}`);
+            });
+          });
+
+          document.querySelectorAll(".delete-button").forEach((button) => {
+            button.addEventListener("click", function () {
+              if (confirm("¿Seguro que deseas eliminar este post?")) {
+                posts = posts.filter((post) => post.id != this.dataset.id);
+                displayPosts(posts);
+              }
+            });
+          });
+        }
+
+        // Ordenar por título
+        document.getElementById("filter-title").addEventListener("click", function () {
+          posts.sort((a, b) => a.title.localeCompare(b.title));
+          displayPosts(posts);
+        });
+
+        // Ordenar por fecha (simulado, en este caso sin cambios)
+        document.getElementById("filter-date").addEventListener("click", function () {
+          alert("Ordenar por fecha aún no implementado.");
+        });
+
+        // Inicializar la visualización
+        displayPosts(posts);
+      });
+    </script>
+  </body>
+</html>

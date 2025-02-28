@@ -7,6 +7,7 @@ btnClaseSesion.addEventListener("click", (e) => {
   if (!localStorage.getItem("userName")) {
     sessionStorage.clear();
     window.location.href = "login_registro.html";
+    history.replaceState(null, null, window.location.href);
   }
 });
 nameUser.innerHTML = sesion.user;
@@ -17,7 +18,7 @@ document.getElementById("frmPost").addEventListener("submit", function (event) {
   const options = {
     year: "numeric", // Año
     month: "long", // Mes
-    day: "numeric", // Dia
+    day: "numeric" // Dia
   };
   const fechaPublicacion = fecha.toLocaleDateString(undefined, options);
   const titulo = document.querySelector("#postTitle");
@@ -28,7 +29,7 @@ document.getElementById("frmPost").addEventListener("submit", function (event) {
   fetch(api + "nuevaPublicacion", {
     method: "POST",
     headers: {
-      "Content-Type": "application/json",
+      "Content-Type": "application/json"
     },
     body: JSON.stringify({
       autor_id: sesion.user_id,
@@ -36,8 +37,8 @@ document.getElementById("frmPost").addEventListener("submit", function (event) {
       rutImagen: image.value,
       categoria: categories.value,
       contenido_publicacion: contentenido.value,
-      fecha_publicacion: fechaPublicacion,
-    }),
+      fecha_publicacion: fechaPublicacion
+    })
   })
     .then((res) => res.json())
     .then((res) => {
@@ -48,42 +49,45 @@ document.getElementById("frmPost").addEventListener("submit", function (event) {
           icon: "success",
           text: res.mensaje,
           showConfirmButton: false,
-          timer: 1500,
+          timer: 1500
         });
       } else {
         Swal.fire({
           title: "Error!",
           icon: "error",
-          text: res.mensaje,
+          text: res.mensaje
         });
       }
+    })
+    .catch((error) => {
+      Swal.fire({
+        title: "El servidor no responde!",
+        icon: "error",
+        text: error
+      });
     });
+
   // document.getElementById("frmPost").reset();
   bootstrap.Modal.getInstance(document.getElementById("addPostModal")).hide();
 });
 // Mostrar/Ocultar comentarios
-document
-  .getElementById("toggle-comments-btn")
-  .addEventListener("click", function () {
-    let commentList = document.getElementById("comment-list");
-    if (commentList.style.display === "none") {
-      commentList.style.display = "block";
-      this.textContent = "Ocultar comentarios";
-    } else {
-      commentList.style.display = "none";
-      this.textContent = "Mostrar comentarios";
-    }
-  });
+document.getElementById("toggle-comments-btn").addEventListener("click", function () {
+  let commentList = document.getElementById("comment-list");
+  if (commentList.style.display === "none") {
+    commentList.style.display = "block";
+    this.textContent = "Ocultar comentarios";
+  } else {
+    commentList.style.display = "none";
+    this.textContent = "Mostrar comentarios";
+  }
+});
 
 // Funcionalidad del botón "Leer más"
 document.getElementById("read-more-btn").addEventListener("click", function () {
   let fullContent = document.getElementById("full-content");
   let summary = document.getElementById("summary");
 
-  if (
-    fullContent.style.display === "none" ||
-    fullContent.style.display === ""
-  ) {
+  if (fullContent.style.display === "none" || fullContent.style.display === "") {
     fullContent.style.display = "block";
     summary.style.display = "none";
     this.textContent = "Leer menos";

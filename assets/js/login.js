@@ -15,25 +15,32 @@ frmLogin.addEventListener("submit", (e) => {
       method: "POST",
       // configuramos la cabecera, Header de peticion lleva una configuracin : contiene un archivo JS a JSON
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
       },
       body: JSON.stringify({
         userName: userName.value,
-        password: password.value,
-      }),
+        password: password.value
+      })
     })
       .then((res) => res.json())
       .then((res) => {
         if (res.estado === true) {
           sessionStorage.setItem("userName", JSON.stringify(res.infoUser));
-           window.location.href = "index.html";
+          window.location.href = "index.html";
         } else {
           Swal.fire({
             title: "Opss..",
             icon: "error",
-            text: res.mensaje,
+            text: res.mensaje
           });
         }
+      })
+      .catch((error) => {
+        Swal.fire({
+          icon: "error",
+          title: "El servidor no responde!",
+          text: error
+        });
       });
   }
 });
@@ -42,25 +49,18 @@ frmRegister.addEventListener("submit", (e) => {
   let accion = e.target.closest("form").getAttribute("data-tipo");
 
   if (accion === "register") {
-    if (
-      validarInputs(
-        regUserName.value,
-        email.value,
-        regPassword.value,
-        pais.value
-      ) === true
-    ) {
+    if (validarInputs(regUserName.value, email.value, regPassword.value, pais.value) === true) {
       fetch(api + "newUser", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "application/json"
         },
         body: JSON.stringify({
           userName: regUserName.value.trim(),
           email: email.value.trim(),
           password: regPassword.value,
-          pais: pais.value,
-        }),
+          pais: pais.value
+        })
       })
         .then((res) => res.json())
         .then((res) => {
@@ -75,33 +75,35 @@ frmRegister.addEventListener("submit", (e) => {
               icon: "success",
               text: res.mensaje,
               showConfirmButton: false,
-              timer: 1500,
+              timer: 1500
             });
           } else {
             Swal.fire({
               title: "Error!",
               icon: "error",
-              text: res.mensaje,
+              text: res.mensaje
             });
           }
+        })
+        .catch((error) => {
+          Swal.fire({
+            title: "El servidor no responde!",
+            icon: "error",
+            text: error
+          });
         });
     } else {
       Swal.fire({
         title: "Error!",
         icon: "error",
-        text: "No pueden haber campos vacios",
+        text: "No pueden haber campos vacios"
       });
     }
   }
 });
 
 function validarInputs(user, email, password, pais) {
-  if (
-    user.length > 0 &&
-    email.length > 0 &&
-    password.length > 0 &&
-    pais.length > 0
-  ) {
+  if (user.length > 0 && email.length > 0 && password.length > 0 && pais.length > 0) {
     if (user.length >= 4) {
       return true;
     }
