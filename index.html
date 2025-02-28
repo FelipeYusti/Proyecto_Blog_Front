@@ -48,12 +48,12 @@
           <div class="dropdown user-menu">
             <button class="btn btn-light dropdown-toggle d-flex align-items-center gap-2" type="button" data-bs-toggle="dropdown">
               <img src="https://previews.123rf.com/images/yupiramos/yupiramos1705/yupiramos170514716/77987175-dise%C3%B1o-gr%C3%A1fico-del-ejemplo-del-vector-del-icono-del-perfil-del-hombre-joven.jpg" alt="Usuario" class="rounded-circle">
-              <span id="nameUser">FelipeYusti</span>
+              <span id="nameUser"></span>
             </button>
             <ul class="dropdown-menu dropdown-menu-end">
-              <li><a class="dropdown-item" href="#"><i class="fa-solid fa-user"></i> Perfil</a></li>
-              <li><a class="dropdown-item" href="#"><i class="fa-solid fa-cog"></i> Configuración</a></li>
-              <li><a class="dropdown-item text-danger" href="#"><i class="fa-solid fa-sign-out-alt"></i> Cerrar sesión</a></li>
+              <li><a class="dropdown-item" href="#"><i class="bi bi-person-fill"></i> Perfil</a></li>
+              <li><a class="dropdown-item" href="#"><i class="bi bi-archive"></i> Mis posts</a></li>
+              <li ><a  class="dropdown-item text-danger" id="btnCerrarSesion" href="#"><i class="bi bi-box-arrow-in-left"></i> Sing Out </a> </li>
             </ul>
           </div>
         </div>
@@ -64,10 +64,76 @@
     <section class="container py-5">
       <div class="row">
         <!-- Artículos -->
-       <div class="contenidoPost" name="contenido" id="contenido">
+        <div class="col-md-8">
+          <div class="hero-section text-center mb-4">
+            <h2>Bienvenidos al Blog Deportivo</h2>
+            <p>
+              Explora las últimas noticias y consejos sobre el mundo deportivo.
+            </p>
+          </div>
 
-       </div>
+          <div class="row mb-2" style=" display: flex; flex-direction: column; margin-right: 380px;" >
+            <div class="col-4">
+                <div class="category-content">
+                  
+                  <button type="submit" id="agregarPost" class="btn btn-info category-card" data-bs-toggle="modal" data-bs-target="#addPostModal">
+                    <i class="bi bi-plus-circle"></i>
+                    <span  >Nuevo Post</span>
+                  </button>
+                </div>
+            </div>
+            
+          </div>
+          <div class="modal fade" id="addPostModal" tabindex="-1" aria-labelledby="addPostLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content bg-dark text-white">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="addPostLabel">Agregar Nuevo Post</h5>
+                  <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                  <form id="frmPost">
+                    <div class="mb-3">
+                      <label for="postTitle" class="form-label">Título de la Publicacion </label>
+                      <input type="text" class="form-control bg-secondary text-white" id="postTitle" required />
+                    </div>
+                    <div class="mb-3">
+                      <label for="postContent" class="form-label">Imagen (opcional)</label>
+                      <input type="file"  class="form-control" name="" id="postImage">
+                    </div>
+                    <div class="mb-3">
+                      <label for="postContent" class="form-label">Imagen (opcional)</label>
+                      <select
+                      class="form-select form-style"
+                      id="categories"
+                      aria-describedby="validationServer04Feedback"
+                      required
+                    >
+                      <option selected disabled value="">Your Coutry...</option>
+                      <option>...</option>
+                      <option value="Fútbol">Futbol</option>
+                      <option value="Tenis">Tenis</option>
+                      <option value="Atletismo">Atletismo</option>
+                      <option value="Basket">Baloncesto</option>
+                    </select>
+                    </div>
+                    <div class="mb-3">
+                      <label for="postContent" class="form-label">Contenido</label>
+                      <textarea class="form-control bg-secondary text-white" id="postContent" rows="4" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary"><i class="bi bi-globe"></i> Publicar </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Artículo 1 -->
+          <div class="contenidoPost" name="contenido" id="contenido">
 
+          </div>
+         
+          
+        </div>
         <!-- Barra lateral -->
         <div class="col-md-4">
           <div class="sidebar p-3 bg-light rounded">
@@ -122,8 +188,9 @@
     <!-- Scripts -->
      
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="./assets/js/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="./assets/js/usuario.js"></script>
-   
+    <script src="./assets/js/index.js"></script>
+
   </body>
 </html>
