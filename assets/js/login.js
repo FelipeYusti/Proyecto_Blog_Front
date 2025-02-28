@@ -7,6 +7,10 @@ let pais = document.querySelector("#regPaisUser");
 let frmLogin = document.querySelector("#frmLogin");
 let frmRegister = document.querySelector("#frmRegister");
 const api = "http://127.0.0.1:4000/api/user/";
+<<<<<<< HEAD
+=======
+
+>>>>>>> salazar
 frmLogin.addEventListener("submit", (e) => {
   e.preventDefault(); // previene el evento por defecto de los formularios
   let accion = e.target.closest("form").getAttribute("data-tipo");
@@ -30,7 +34,11 @@ frmLogin.addEventListener("submit", (e) => {
         } else {
           Swal.fire({
             title: "Opss..",
+<<<<<<< HEAD
             icon: "error",
+=======
+            icon: "info",
+>>>>>>> salazar
             text: res.mensaje,
           });
         }
@@ -43,12 +51,16 @@ frmRegister.addEventListener("submit", (e) => {
 
   if (accion === "register") {
     if (
+<<<<<<< HEAD
       validarInputs(
         regUserName.value,
         email.value,
         regPassword.value,
         pais.value
       ) === true
+=======
+      validarInputs(regUserName.value, email.value, regPassword.value, pais)
+>>>>>>> salazar
     ) {
       fetch(api + "newUser", {
         method: "POST",
