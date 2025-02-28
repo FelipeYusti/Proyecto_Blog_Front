@@ -1,75 +1,66 @@
-// Mostrar/Ocultar comentarios
-document.getElementById("toggle-comments-btn").addEventListener("click", function () {
-  let commentList = document.getElementById("comment-list");
-  if (commentList.style.display === "none") {
-    commentList.style.display = "block";
-    this.textContent = "Ocultar comentarios";
-  } else {
-    commentList.style.display = "none";
-    this.textContent = "Mostrar comentarios";
-  }
-});
+let contenido = document.querySelector("#contenido");
+const api = "http://127.0.0.1:4000/api/publicaciones";
 
-// Funcionalidad del botón "Leer más"
-document.getElementById("read-more-btn").addEventListener("click", function () {
-  let fullContent = document.getElementById("full-content");
-  let summary = document.getElementById("summary");
-
-  if (fullContent.style.display === "none" || fullContent.style.display === "") {
-    fullContent.style.display = "block";
-    summary.style.display = "none";
-    this.textContent = "Leer menos";
-  } else {
-    fullContent.style.display = "none";
-    summary.style.display = "block";
-    this.textContent = "Leer más";
-  }
-});
-document.getElementById("frmPost").addEventListener("submit", function (event) {
-  event.preventDefault();
-  const fecha = new Date();
-  const options = {
-    year: "numeric", // Año
-    month: "long", // Mes
-    day: "numeric" // Dia
-  };
-  const fechaPublicacion = fecha.toLocaleDateString(undefined, options);
-  const titulo = document.querySelector("#postTitle").value;
-  const contentenido = document.querySelector("#postContent").value;
-  const image = document.querySelector("#postImage").value;
-
-  fetch(api + "nuevaPublicacion", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      autor_id: autor_id.value,
-      titulo: titulo.value.trim(),
-      rutImagen: image.value,
-      contenido_publicacion: contentenido.value,
-      fecha_publicacion: fechaPublicacion
-    })
-  })
-    .then((res) => res.json())
-    .then((res) => {
-      if (res) {
-        Swal.fire({
-          position: "top",
-          title: "Se publico correctamente!",
-          icon: "success",
-          text: res.mensaje,
-          showConfirmButton: false,
-          timer: 1500
-        });
-      } else {
-        Swal.fire({
-          title: "Error!",
-          icon: "error",
-          text: res.mensaje
-        });
-      }
+function listFichas() {
+  fetch(api + "/listarTodo")
+    .then((data) => data.json())
+    .then((data) => {
+      console.log(data);
+      data.listarPublicaciones.map((post) => {
+        contenido.innerHTML += `
+        <div class="article card mb-4 shadow-sm">
+            <!-- Imagen del post -->
+            <img
+              src="https://universidadeuropea.com/resources/media/images/241009-master-alto-rendimiento-dep.2e16d0ba.fill-767x384.jpg"
+              class="card-img-top"
+              alt="Imagen del post"
+              onerror="this.style.display='block'"
+            />
+          
+            <div class="card-body">
+              <h3 class="card-title">${post.titulo}</h3>
+              <p class="text-muted">Publicado el ${post.fecha_publicacion} por Messi</p>
+              <p id="summary" class="card-text">
+              ${post.contenido_publicacion}
+              </p>
+              <p id="full-content" class="hidden-content">
+                Para mejorar tu rendimiento en el fútbol, es fundamental centrarse en el entrenamiento de
+                resistencia y agilidad. Ejercicios como los cambios de dirección, sprints y entrenamiento con
+                balón pueden marcar la diferencia en tu juego. Además, es clave mantener una buena
+                alimentación y descanso adecuado para rendir al máximo.
+              </p>
+              <button class="btn btn-primary" id="read-more-btn">Leer más</button>
+            </div>
+          
+            <!-- Sección de Comentarios -->
+            <div class="card-footer">
+              <h5>Comentarios</h5>
+              <button class="btn btn-outline-dark" id="toggle-comments-btn">Mostrar comentarios</button>
+              <div class="comment-list mt-3" id="comment-list" style="display: none">
+                <div class="comment-item">
+                  <strong>María Gómez:</strong>
+                  <p>¡Gran artículo! Los consejos son muy útiles, especialmente para mejorar la agilidad.</p>
+                </div>
+                <div class="comment-item">
+                  <strong>Carlos Martínez:</strong>
+                  <p>¡Interesante enfoque! Definitivamente probaré estos ejercicios.</p>
+                </div>
+              </div>
+              <div class="comment-input mt-3">
+                <form>
+                  <textarea
+                    class="form-control"
+                    id="commentText"
+                    rows="3"
+                    placeholder="Escribe tu comentario aquí..."
+                  ></textarea>
+                  <button type="submit" class="btn btn-success mt-2">Enviar Comentario</button>
+                </form>
+              </div>
+            </div>
+          </div>         
+          `;
+      });
     });
-  document.getElementById("frmPost").reset();
-  bootstrap.Modal.getInstance(document.getElementById("addPostModal")).hide();
-});
+}
+listFichas();

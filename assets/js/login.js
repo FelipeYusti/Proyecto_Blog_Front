@@ -7,6 +7,7 @@ let pais = document.querySelector("#regPaisUser");
 let frmLogin = document.querySelector("#frmLogin");
 let frmRegister = document.querySelector("#frmRegister");
 const api = "http://127.0.0.1:4000/api/user/";
+
 frmLogin.addEventListener("submit", (e) => {
   e.preventDefault(); // previene el evento por defecto de los formularios
   let accion = e.target.closest("form").getAttribute("data-tipo");
