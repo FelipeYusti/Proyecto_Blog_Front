@@ -48,12 +48,12 @@
           <div class="dropdown user-menu">
             <button class="btn btn-light dropdown-toggle d-flex align-items-center gap-2" type="button" data-bs-toggle="dropdown">
               <img src="https://previews.123rf.com/images/yupiramos/yupiramos1705/yupiramos170514716/77987175-dise%C3%B1o-gr%C3%A1fico-del-ejemplo-del-vector-del-icono-del-perfil-del-hombre-joven.jpg" alt="Usuario" class="rounded-circle">
-              <span id="nameUser">FelipeYusti</span>
+              <span id="nameUser"></span>
             </button>
             <ul class="dropdown-menu dropdown-menu-end">
-              <li><a class="dropdown-item" href="#"><i class="fa-solid fa-user"></i> Perfil</a></li>
-              <li><a class="dropdown-item" href="#"><i class="fa-solid fa-cog"></i> Configuración</a></li>
-              <li><a class="dropdown-item text-danger" href="#"><i class="fa-solid fa-sign-out-alt"></i> Cerrar sesión</a></li>
+              <li><a class="dropdown-item" href="#"><i class="bi bi-person-fill"></i> Perfil</a></li>
+              <li><a class="dropdown-item" href="#"><i class="bi bi-archive"></i> Mis posts</a></li>
+              <li ><a  class="dropdown-item text-danger" id="btnCerrarSesion" href="#"><i class="bi bi-box-arrow-in-left"></i> Sing Out </a> </li>
             </ul>
           </div>
         </div>
@@ -78,7 +78,7 @@
                   
                   <button type="submit" id="agregarPost" class="btn btn-info category-card" data-bs-toggle="modal" data-bs-target="#addPostModal">
                     <i class="bi bi-plus-circle"></i>
-                    <span>Nuevo Post</span>
+                    <span  >Nuevo Post</span>
                   </button>
                 </div>
             </div>
