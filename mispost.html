@@ -87,7 +87,7 @@
     <section class="container py-5">
       <div class="row">
         <!-- Artículos -->
-        <div class="col-md-8">
+        <div class="col-md-9">
           <div class="search-bar mb-4">
             <label for="search-posts" class="sr-only">Buscar posts</label>
             <input
@@ -105,11 +105,40 @@
 
           <!-- Posts -->
 
-          <div class="posts-list"></div>
+          <div class="container-fluid">
+            <div class="row posts-list">
+              <div class="col-5">
+                <div class="article card mb-4 shadow-sm position-relative" >
+                  <img
+                    src="https://universidadeuropea.com/resources/media/images/241009-master-alto-rendimiento-dep.2e16d0ba.fill-767x384.jpg"
+                    alt="Imagen de ${post.title}"
+                    class="post-image"
+                  />
+                  <div class="post-details p-3">
+                    <h3 class="post-title">Mi título</h3>
+                    <p class="post-excerpt">Mi post</p>
+                  </div>
+
+                  <!-- Botones alineados a la derecha -->
+                  <div class="post-actions position-absolute rounded-pill top-0 end-0 m-1" >
+                    <button
+                      class="btn btn-light btn-actions rounded-pill edit-button me-1"
+                      data-id="${post.id}"
+                    >
+                      <i class="bi bi-pencil-square text-dark" style="font-size: larger"></i>
+                    </button>
+                    <button class="btn btn-danger btn-actions rounded-pill delete-button" data-id="${post.id}">
+                      <i class="bi bi-trash3 text-dark" style="font-size: larger;"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
         <!-- Barra lateral -->
-        <div class="col-md-4">
+        <div class="col-md-3">
           <div class="sidebar p-3 bg-light rounded">
             <h5 class="mb-3">Categorías</h5>
             <div class="row g-2">
@@ -181,7 +210,7 @@
         const postsList = document.querySelector(".posts-list");
 
         // Datos de posts simulados
-        let posts = [
+        /*   let posts = [
           {
             id: 1,
             title: "Mi primer post",
@@ -195,14 +224,114 @@
             excerpt: "Aquí hablo sobre algo interesante",
             image:
               "https://universidadeuropea.com/resources/media/images/241009-master-alto-rendimiento-dep.2e16d0ba.fill-767x384.jpg"
+          },
+          {
+            id: 3,
+            title: "Mi segundo post",
+            excerpt: "Aquí hablo sobre algo interesante",
+            image:
+              "https://universidadeuropea.com/resources/media/images/241009-master-alto-rendimiento-dep.2e16d0ba.fill-767x384.jpg"
+          },
+          {
+            id: 4,
+            title: "Mi segundo post",
+            excerpt: "Aquí hablo sobre algo interesante",
+            image:
+              "https://universidadeuropea.com/resources/media/images/241009-master-alto-rendimiento-dep.2e16d0ba.fill-767x384.jpg"
+          },
+          {
+            id: 1,
+            title: "Mi primer post",
+            excerpt: "Este es el contenido de mi primer post",
+            image:
+              "https://universidadeuropea.com/resources/media/images/241009-master-alto-rendimiento-dep.2e16d0ba.fill-767x384.jpg"
+          },
+          {
+            id: 2,
+            title: "Mi segundo post",
+            excerpt: "Aquí hablo sobre algo interesante",
+            image:
+              "https://universidadeuropea.com/resources/media/images/241009-master-alto-rendimiento-dep.2e16d0ba.fill-767x384.jpg"
+          },
+          {
+            id: 3,
+            title: "Mi segundo post",
+            excerpt: "Aquí hablo sobre algo interesante",
+            image:
+              "https://universidadeuropea.com/resources/media/images/241009-master-alto-rendimiento-dep.2e16d0ba.fill-767x384.jpg"
+          },
+          {
+            id: 4,
+            title: "Mi segundo post",
+            excerpt: "Aquí hablo sobre algo interesante",
+            image:
+              "https://universidadeuropea.com/resources/media/images/241009-master-alto-rendimiento-dep.2e16d0ba.fill-767x384.jpg"
+          },
+          {
+            id: 1,
+            title: "Mi primer post",
+            excerpt: "Este es el contenido de mi primer post",
+            image:
+              "https://universidadeuropea.com/resources/media/images/241009-master-alto-rendimiento-dep.2e16d0ba.fill-767x384.jpg"
+          },
+          {
+            id: 2,
+            title: "Mi segundo post",
+            excerpt: "Aquí hablo sobre algo interesante",
+            image:
+              "https://universidadeuropea.com/resources/media/images/241009-master-alto-rendimiento-dep.2e16d0ba.fill-767x384.jpg"
+          },
+          {
+            id: 3,
+            title: "Mi segundo post",
+            excerpt: "Aquí hablo sobre algo interesante",
+            image:
+              "https://universidadeuropea.com/resources/media/images/241009-master-alto-rendimiento-dep.2e16d0ba.fill-767x384.jpg"
+          },
+          {
+            id: 4,
+            title: "Mi segundo post",
+            excerpt: "Aquí hablo sobre algo interesante",
+            image:
+              "https://universidadeuropea.com/resources/media/images/241009-master-alto-rendimiento-dep.2e16d0ba.fill-767x384.jpg"
+          },
+          {
+            id: 1,
+            title: "Mi primer post",
+            excerpt: "Este es el contenido de mi primer post",
+            image:
+              "https://universidadeuropea.com/resources/media/images/241009-master-alto-rendimiento-dep.2e16d0ba.fill-767x384.jpg"
+          },
+          {
+            id: 2,
+            title: "Mi segundo post",
+            excerpt: "Aquí hablo sobre algo interesante",
+            image:
+              "https://universidadeuropea.com/resources/media/images/241009-master-alto-rendimiento-dep.2e16d0ba.fill-767x384.jpg"
+          },
+          {
+            id: 3,
+            title: "Mi segundo post",
+            excerpt: "Aquí hablo sobre algo interesante",
+            image:
+              "https://universidadeuropea.com/resources/media/images/241009-master-alto-rendimiento-dep.2e16d0ba.fill-767x384.jpg"
+          },
+          {
+            id: 4,
+            title: "Mi segundo post",
+            excerpt: "Aquí hablo sobre algo interesante",
+            image:
+              "https://universidadeuropea.com/resources/media/images/241009-master-alto-rendimiento-dep.2e16d0ba.fill-767x384.jpg"
           }
-        ];
+        ]; */
 
         // Renderiza los posts en la interfaz
         function displayPosts(filteredPosts) {
           postsList.innerHTML = "";
           filteredPosts.forEach((post) => {
             const postCard = document.createElement("div");
+            const col = document.createElement("div");
+            col.setAttribute("class", "col-md-4");
             postCard.classList.add("post-card");
             postCard.setAttribute("class", "article card mb-4 shadow-sm");
             postCard.innerHTML = `
@@ -211,13 +340,18 @@
               <h3 class="post-title">${post.title}</h3>
               <p class="post-excerpt">${post.excerpt}</p>
             </div>
-            <div class="post-actions">
-              <button class="btn btn-success view-button" data-id="${post.id}">Ver</button>
-              <button class="btn btn-warning edit-button" data-id="${post.id}">Editar</button>
-              <button class="btn btn-danger delete-button" data-id="${post.id}">Eliminar</button>
+            <div class="post-actions" style="display: flex; flex-direction:column;" >
+               <div class="col-2">
+                <button class="btn btn-warning rounded-pill edit-button" data-id="${post.id}"><i class="bi bi-pencil-square" style="font-size: larger;"></i></button>
+                </div>
+              <div class="col-2">
+                <button class="btn btn-danger mt-2 rounded-pill delete-button"  data-id="${post.id}"><i class="bi bi-trash-fill" style="font-size: larger;"></i></button>
+              </div>
             </div>
           `;
-            postsList.appendChild(postCard);
+
+            col.appendChild(postCard);
+            postsList.appendChild(col);
           });
           attachEventListeners();
         }
@@ -268,5 +402,6 @@
         displayPosts(posts);
       });
     </script>
+    <script src="/assets/js/usuario.js"></script>
   </body>
 </html>
