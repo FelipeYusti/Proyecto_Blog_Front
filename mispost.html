@@ -13,7 +13,10 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
     />
-    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="./assets/css/styleIndex.css" />
   </head>
 
@@ -33,10 +36,14 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav mx-auto">
             <li class="nav-item">
-              <a class="nav-link active" href="#"><i class="fa-solid fa-home"></i> Inicio</a>
+              <a class="nav-link active" href="#"
+                ><i class="fa-solid fa-home"></i> Inicio</a
+              >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#"><i class="fa-solid fa-futbol"></i> Fútbol</a>
+              <a class="nav-link" href="#"
+                ><i class="fa-solid fa-futbol"></i> Fútbol</a
+              >
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#"
@@ -44,10 +51,14 @@
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#"><i class="fa-solid fa-running"></i> Atletismo</a>
+              <a class="nav-link" href="#"
+                ><i class="fa-solid fa-running"></i> Atletismo</a
+              >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#"><i class="fa-solid fa-table-tennis"></i> Tenis</a>
+              <a class="nav-link" href="#"
+                ><i class="fa-solid fa-table-tennis"></i> Tenis</a
+              >
             </li>
           </ul>
 
@@ -67,13 +78,20 @@
             </button>
             <ul class="dropdown-menu dropdown-menu-end">
               <li>
-                <a class="dropdown-item" href="#"><i class="bi bi-person-fill"></i> Perfil</a>
+                <a class="dropdown-item" href="#"
+                  ><i class="bi bi-person-fill"></i> Perfil</a
+                >
               </li>
               <li>
-                <a class="dropdown-item" href="#"><i class="bi bi-archive"></i> Mis posts</a>
+                <a class="dropdown-item" href="/mispost.html"
+                  ><i class="bi bi-archive"></i> Mis posts</a
+                >
               </li>
               <li>
-                <a class="dropdown-item text-danger" id="btnCerrarSesion" href="#"
+                <a
+                  class="dropdown-item text-danger"
+                  id="btnCerrarSesion"
+                  href="#"
                   ><i class="bi bi-box-arrow-in-left"></i> Sing Out
                 </a>
               </li>
@@ -86,54 +104,120 @@
     <!-- Sección principal -->
     <section class="container py-5">
       <div class="row">
+        <label for="search-posts" class="sr-only"
+          ><h5>MIS PUBLICACIONES...</h5></label
+        >
         <!-- Artículos -->
-        <div class="col-md-9">
-          <div class="search-bar mb-4">
+        <div class="col-md-9 mt-4">
+          <div class="search-bar mb-4 mt-2">
             <label for="search-posts" class="sr-only">Buscar posts</label>
             <input
               type="text"
               placeholder="Buscar mis posts..."
               id="search-posts"
-              class="form-control"
+              class="form-control mt-2"
             />
           </div>
 
           <div class="filters mb-4">
-            <button class="btn btn-info filter-button" id="filter-date">Por fecha</button>
-            <button class="btn btn-info filter-button" id="filter-title">Por título</button>
+            <button class="btn btn-warning filter-button" id="filter-date">
+              Por fecha
+            </button>
+            <button class="btn btn-danger filter-button" id="filter-title">
+              Por título
+            </button>
           </div>
 
           <!-- Posts -->
-
-          <div class="container-fluid">
-            <div class="row posts-list">
-              <div class="col-5">
-                <div class="article card mb-4 shadow-sm position-relative" >
-                  <img
-                    src="https://universidadeuropea.com/resources/media/images/241009-master-alto-rendimiento-dep.2e16d0ba.fill-767x384.jpg"
-                    alt="Imagen de ${post.title}"
-                    class="post-image"
-                  />
-                  <div class="post-details p-3">
-                    <h3 class="post-title">Mi título</h3>
-                    <p class="post-excerpt">Mi post</p>
-                  </div>
-
-                  <!-- Botones alineados a la derecha -->
-                  <div class="post-actions position-absolute rounded-pill top-0 end-0 m-1" >
+          <div
+            class="modal fade"
+            id="addPostModal"
+            tabindex="-1"
+            aria-labelledby="addPostLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog">
+              <div class="modal-content bg-dark text-white">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="addPostLabel">
+                    Agregar Nuevo Post
+                  </h5>
+                  <button
+                    type="button"
+                    class="btn-close btn-close-white"
+                    data-bs-dismiss="modal"
+                  ></button>
+                </div>
+                <div class="modal-body">
+                  <form id="frmPost">
+                    <div class="mb-3">
+                      <label for="postTitle" class="form-label"
+                        >Título de la Publicacion
+                      </label>
+                      <input
+                        type="text"
+                        class="form-control bg-secondary text-white"
+                        id="postTitle"
+                        required
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label for="postContent" class="form-label"
+                        >Imagen (opcional)</label
+                      >
+                      <input
+                        type="file"
+                        class="form-control"
+                        name=""
+                        id="postImage"
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label for="postContent" class="form-label"
+                        >Category</label
+                      >
+                      <select
+                        class="form-select form-style"
+                        id="categories"
+                        aria-describedby="validationServer04Feedback"
+                        required
+                      >
+                        <option selected disabled value="">
+                          Categories...
+                        </option>
+                        <option>...</option>
+                        <option value="Fútbol">Futbol</option>
+                        <option value="Tenis">Tenis</option>
+                        <option value="Atletismo">Atletismo</option>
+                        <option value="Basket">Baloncesto</option>
+                      </select>
+                    </div>
+                    <div class="mb-3">
+                      <label for="postContent" class="form-label"
+                        >Contenido</label
+                      >
+                      <textarea
+                        class="form-control bg-secondary text-white"
+                        id="postContent"
+                        rows="4"
+                        required
+                      ></textarea>
+                    </div>
                     <button
-                      class="btn btn-light btn-actions rounded-pill edit-button me-1"
-                      data-id="${post.id}"
+                      type="submit"
+                      class="btn btn-primary"
+                      id="btnGuardar"
+                      data-action="save_changes-post"
                     >
-                      <i class="bi bi-pencil-square text-dark" style="font-size: larger"></i>
+                      <i class="bi bi-globe"></i> Publicar
                     </button>
-                    <button class="btn btn-danger btn-actions rounded-pill delete-button" data-id="${post.id}">
-                      <i class="bi bi-trash3 text-dark" style="font-size: larger;"></i>
-                    </button>
-                  </div>
+                  </form>
                 </div>
               </div>
             </div>
+          </div>
+          <div class="container-fluid">
+            <div class="posts-list"></div>
           </div>
         </div>
 
@@ -204,204 +288,7 @@
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const searchInput = document.getElementById("search-posts");
-        const postsList = document.querySelector(".posts-list");
-
-        // Datos de posts simulados
-        /*   let posts = [
-          {
-            id: 1,
-            title: "Mi primer post",
-            excerpt: "Este es el contenido de mi primer post",
-            image:
-              "https://universidadeuropea.com/resources/media/images/241009-master-alto-rendimiento-dep.2e16d0ba.fill-767x384.jpg"
-          },
-          {
-            id: 2,
-            title: "Mi segundo post",
-            excerpt: "Aquí hablo sobre algo interesante",
-            image:
-              "https://universidadeuropea.com/resources/media/images/241009-master-alto-rendimiento-dep.2e16d0ba.fill-767x384.jpg"
-          },
-          {
-            id: 3,
-            title: "Mi segundo post",
-            excerpt: "Aquí hablo sobre algo interesante",
-            image:
-              "https://universidadeuropea.com/resources/media/images/241009-master-alto-rendimiento-dep.2e16d0ba.fill-767x384.jpg"
-          },
-          {
-            id: 4,
-            title: "Mi segundo post",
-            excerpt: "Aquí hablo sobre algo interesante",
-            image:
-              "https://universidadeuropea.com/resources/media/images/241009-master-alto-rendimiento-dep.2e16d0ba.fill-767x384.jpg"
-          },
-          {
-            id: 1,
-            title: "Mi primer post",
-            excerpt: "Este es el contenido de mi primer post",
-            image:
-              "https://universidadeuropea.com/resources/media/images/241009-master-alto-rendimiento-dep.2e16d0ba.fill-767x384.jpg"
-          },
-          {
-            id: 2,
-            title: "Mi segundo post",
-            excerpt: "Aquí hablo sobre algo interesante",
-            image:
-              "https://universidadeuropea.com/resources/media/images/241009-master-alto-rendimiento-dep.2e16d0ba.fill-767x384.jpg"
-          },
-          {
-            id: 3,
-            title: "Mi segundo post",
-            excerpt: "Aquí hablo sobre algo interesante",
-            image:
-              "https://universidadeuropea.com/resources/media/images/241009-master-alto-rendimiento-dep.2e16d0ba.fill-767x384.jpg"
-          },
-          {
-            id: 4,
-            title: "Mi segundo post",
-            excerpt: "Aquí hablo sobre algo interesante",
-            image:
-              "https://universidadeuropea.com/resources/media/images/241009-master-alto-rendimiento-dep.2e16d0ba.fill-767x384.jpg"
-          },
-          {
-            id: 1,
-            title: "Mi primer post",
-            excerpt: "Este es el contenido de mi primer post",
-            image:
-              "https://universidadeuropea.com/resources/media/images/241009-master-alto-rendimiento-dep.2e16d0ba.fill-767x384.jpg"
-          },
-          {
-            id: 2,
-            title: "Mi segundo post",
-            excerpt: "Aquí hablo sobre algo interesante",
-            image:
-              "https://universidadeuropea.com/resources/media/images/241009-master-alto-rendimiento-dep.2e16d0ba.fill-767x384.jpg"
-          },
-          {
-            id: 3,
-            title: "Mi segundo post",
-            excerpt: "Aquí hablo sobre algo interesante",
-            image:
-              "https://universidadeuropea.com/resources/media/images/241009-master-alto-rendimiento-dep.2e16d0ba.fill-767x384.jpg"
-          },
-          {
-            id: 4,
-            title: "Mi segundo post",
-            excerpt: "Aquí hablo sobre algo interesante",
-            image:
-              "https://universidadeuropea.com/resources/media/images/241009-master-alto-rendimiento-dep.2e16d0ba.fill-767x384.jpg"
-          },
-          {
-            id: 1,
-            title: "Mi primer post",
-            excerpt: "Este es el contenido de mi primer post",
-            image:
-              "https://universidadeuropea.com/resources/media/images/241009-master-alto-rendimiento-dep.2e16d0ba.fill-767x384.jpg"
-          },
-          {
-            id: 2,
-            title: "Mi segundo post",
-            excerpt: "Aquí hablo sobre algo interesante",
-            image:
-              "https://universidadeuropea.com/resources/media/images/241009-master-alto-rendimiento-dep.2e16d0ba.fill-767x384.jpg"
-          },
-          {
-            id: 3,
-            title: "Mi segundo post",
-            excerpt: "Aquí hablo sobre algo interesante",
-            image:
-              "https://universidadeuropea.com/resources/media/images/241009-master-alto-rendimiento-dep.2e16d0ba.fill-767x384.jpg"
-          },
-          {
-            id: 4,
-            title: "Mi segundo post",
-            excerpt: "Aquí hablo sobre algo interesante",
-            image:
-              "https://universidadeuropea.com/resources/media/images/241009-master-alto-rendimiento-dep.2e16d0ba.fill-767x384.jpg"
-          }
-        ]; */
-
-        // Renderiza los posts en la interfaz
-        function displayPosts(filteredPosts) {
-          postsList.innerHTML = "";
-          filteredPosts.forEach((post) => {
-            const postCard = document.createElement("div");
-            const col = document.createElement("div");
-            col.setAttribute("class", "col-md-4");
-            postCard.classList.add("post-card");
-            postCard.setAttribute("class", "article card mb-4 shadow-sm");
-            postCard.innerHTML = `
-            <img src="${post.image}" alt="Imagen de ${post.title}" class="post-image"/>
-            <div class="post-details">
-              <h3 class="post-title">${post.title}</h3>
-              <p class="post-excerpt">${post.excerpt}</p>
-            </div>
-            <div class="post-actions" style="display: flex; flex-direction:column;" >
-               <div class="col-2">
-                <button class="btn btn-warning rounded-pill edit-button" data-id="${post.id}"><i class="bi bi-pencil-square" style="font-size: larger;"></i></button>
-                </div>
-              <div class="col-2">
-                <button class="btn btn-danger mt-2 rounded-pill delete-button"  data-id="${post.id}"><i class="bi bi-trash-fill" style="font-size: larger;"></i></button>
-              </div>
-            </div>
-          `;
-
-            col.appendChild(postCard);
-            postsList.appendChild(col);
-          });
-          attachEventListeners();
-        }
-
-        // Filtros de búsqueda
-        searchInput.addEventListener("input", function () {
-          const query = searchInput.value.toLowerCase();
-          const filteredPosts = posts.filter((post) => post.title.toLowerCase().includes(query));
-          displayPosts(filteredPosts);
-        });
-
-        // Eventos para los botones de acción
-        function attachEventListeners() {
-          document.querySelectorAll(".view-button").forEach((button) => {
-            button.addEventListener("click", function () {
-              alert(`Ver post ${this.dataset.id}`);
-            });
-          });
-
-          document.querySelectorAll(".edit-button").forEach((button) => {
-            button.addEventListener("click", function () {
-              alert(`Editar post ${this.dataset.id}`);
-            });
-          });
-
-          document.querySelectorAll(".delete-button").forEach((button) => {
-            button.addEventListener("click", function () {
-              if (confirm("¿Seguro que deseas eliminar este post?")) {
-                posts = posts.filter((post) => post.id != this.dataset.id);
-                displayPosts(posts);
-              }
-            });
-          });
-        }
-
-        // Ordenar por título
-        document.getElementById("filter-title").addEventListener("click", function () {
-          posts.sort((a, b) => a.title.localeCompare(b.title));
-          displayPosts(posts);
-        });
-
-        // Ordenar por fecha (simulado, en este caso sin cambios)
-        document.getElementById("filter-date").addEventListener("click", function () {
-          alert("Ordenar por fecha aún no implementado.");
-        });
-
-        // Inicializar la visualización
-        displayPosts(posts);
-      });
-    </script>
     <script src="/assets/js/usuario.js"></script>
+    <script src="/assets/js/index.js"></script>
   </body>
 </html>

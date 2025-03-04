@@ -52,7 +52,7 @@
             </button>
             <ul class="dropdown-menu dropdown-menu-end">
               <li><a class="dropdown-item" href="#"><i class="bi bi-person-fill"></i> Perfil</a></li>
-              <li><a class="dropdown-item" href="#"><i class="bi bi-archive"></i> Mis posts</a></li>
+              <li><a class="dropdown-item" href="/mispost.html"><i class="bi bi-archive"></i> Mis posts</a></li>
               <li ><a  class="dropdown-item text-danger" id="btnCerrarSesion" href="#"><i class="bi bi-box-arrow-in-left"></i> Sing Out </a> </li>
             </ul>
           </div>
@@ -102,14 +102,14 @@
                       <input type="file"  class="form-control" name="" id="postImage">
                     </div>
                     <div class="mb-3">
-                      <label for="postContent" class="form-label">Imagen (opcional)</label>
+                      <label for="postContent" class="form-label">Category</label>
                       <select
                       class="form-select form-style"
                       id="categories"
                       aria-describedby="validationServer04Feedback"
                       required
                     >
-                      <option selected disabled value="">Your Coutry...</option>
+                      <option selected disabled value="">Categories...</option>
                       <option>...</option>
                       <option value="Fútbol">Futbol</option>
                       <option value="Tenis">Tenis</option>
@@ -121,7 +121,7 @@
                       <label for="postContent" class="form-label">Contenido</label>
                       <textarea class="form-control bg-secondary text-white" id="postContent" rows="4" required></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary"><i class="bi bi-globe"></i> Publicar </button>
+                    <button type="submit" class="btn btn-primary" id="btnGuardar" data-action="public-post" ><i class="bi bi-globe"></i> Publicar </button>
                   </form>
                 </div>
               </div>
