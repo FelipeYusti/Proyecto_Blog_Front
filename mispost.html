@@ -139,9 +139,7 @@
             <div class="modal-dialog">
               <div class="modal-content bg-dark text-white">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="addPostLabel">
-                    Agregar Nuevo Post
-                  </h5>
+                  <h5 class="modal-title" id="addPostLabel">Actualizar Post</h5>
                   <button
                     type="button"
                     class="btn-close btn-close-white"
@@ -158,6 +156,17 @@
                         type="text"
                         class="form-control bg-secondary text-white"
                         id="postTitle"
+                        required
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label for="postSubTitle" class="form-label"
+                        >Sub Titulo de la Publicacion
+                      </label>
+                      <input
+                        type="text"
+                        class="form-control bg-secondary text-white"
+                        id="postSubTitle"
                         required
                       />
                     </div>
@@ -207,7 +216,7 @@
                       type="submit"
                       class="btn btn-primary"
                       id="btnGuardar"
-                      data-action="save_changes-post"
+                      data-action="save-changes-post"
                     >
                       <i class="bi bi-globe"></i> Publicar
                     </button>
