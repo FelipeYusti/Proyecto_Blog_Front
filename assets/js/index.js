@@ -72,7 +72,7 @@ document.addEventListener("DOMContentLoaded", function () {
               data.datos.forEach((comentarios) => {
                 contenidoComentario.innerHTML += `
                   <div class="comment-item">
-                    <strong>${comentarios.usuario_id}:</strong>
+                    <strong>${comentarios.usuario_id.userName}:</strong>
                     <p>${comentarios.contenido_comentario}</p>
                   </div>`;
               });
