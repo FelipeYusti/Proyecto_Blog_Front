@@ -1,6 +1,7 @@
 let contenido = document.querySelector("#contenido");
 const api1 = "http://127.0.0.1:4000/api/publicaciones";
 //let bntFutbol = document.querySelector("#btnFutbol");
+let botonValue = "";
 
 //Listar todos
 
@@ -32,10 +33,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 </div>
               
                 <!-- Sección de Comentarios -->
+
                 <div class="card-footer">
                   <h5>Comentarios</h5>
-                  <button class="btn btn-outline-dark" id="toggle-comments-btn-${post.id}">Mostrar comentarios</button>
-                  <div class="comment-list mt-3" id="comment-list-${post.id}" style="display: none">
+              <button class="btn btn-outline-dark" name="comentario${post._id}" data-id="${post._id}" value="${post._id}" id="toggle-comments-btn-${post._id}">Mostrar comentarios</button>
+                  <div class="comment-list mt-3" id="comment-list-${post._id}" style="display: none">
+
                     <div class="comment-item">
                       <strong>María Gómez:</strong>
                       <p>¡Gran artículo! Los consejos son muy útiles, especialmente para mejorar la agilidad.</p>
@@ -66,7 +69,7 @@ document.addEventListener("DOMContentLoaded", function () {
           const postId = event.target.id.split("-")[3];
           const fullContent = document.getElementById(`full-content-${postId}`);
           const summary = document.getElementById(`summary-${postId}`);
-          console.log("click");
+
           if (
             fullContent.style.display === "none" ||
             fullContent.style.display === ""
@@ -80,13 +83,35 @@ document.addEventListener("DOMContentLoaded", function () {
             event.target.textContent = "Leer más";
           }
         }
+        //Ver cometarios
 
         if (
           event.target &&
           event.target.id.startsWith("toggle-comments-btn-")
         ) {
+          const contenidoComentario = document.getElementById(
+            `comment-list-${postId}`
+          );
+
+          botonValue = event.target.value;
           const postId = event.target.id.split("-")[3];
           const commentList = document.getElementById(`comment-list-${postId}`);
+
+          fetch(api1 + `/obtenerComentarios/${botonValue}`)
+            .then((data) => data.json())
+            .then((data) => {
+              console.log(data);
+              data.datos.forEach((comentarios) => {
+                contenidoComentario.innerHTML = "";
+                contenidoComentario.innerHTML = ` <div class="comment-item">
+                      <strong>${comentarios.usuario_id}:</strong>
+                      <p>${comentarios.contenido_comentario}</p>
+                    </div>`;
+              });
+            });
+
+          console.log("Valor del boton (postId):", botonValue);
+
           if (commentList.style.display === "none") {
             commentList.style.display = "block";
             event.target.textContent = "Ocultar comentarios";
@@ -95,6 +120,16 @@ document.addEventListener("DOMContentLoaded", function () {
             event.target.textContent = "Mostrar comentarios";
           }
         }
+
+        /* let boton = document.querySelector(`#comentario${post.id}`);
+        boton.addEventListener("click", (res, req) => {
+          fetch(api1 + "/obtenerComentarios")
+            .then((data) => data.json())
+            .then((data) => {
+              console.log(data);
+              data.listarPublicaciones.forEach((post) => {});
+            });
+        }); */
       });
     });
 });
@@ -112,7 +147,7 @@ document
         console.log(data);
         data.listarPublicaciones.forEach((post) => {
           contenido.innerHTML += `
-          <div class="article card mb-4 shadow-sm" id="cardPost-${post.id}">
+         <div class="article card mb-4 shadow-sm" id="cardPost-${post.id}">
                 <!-- Imagen del post -->
                 <img
                   src="https://universidadeuropea.com/resources/media/images/241009-master-alto-rendimiento-dep.2e16d0ba.fill-767x384.jpg"
@@ -128,16 +163,17 @@ document
                   ${post.sub_titulo}
                   </p>
                   <p id="full-content-${post.id}" class="hidden-content" style="display: none;">
-                       ${post.contenido_publicacion}
+                     ${post.contenido_publicacion}
                   </p>
                   <button class="btn btn-primary" id="read-more-btn-${post.id}">Leer más</button>
                 </div>
               
                 <!-- Sección de Comentarios -->
+
                 <div class="card-footer">
                   <h5>Comentarios</h5>
-                  <button class="btn btn-outline-dark" id="toggle-comments-btn-${post.id}">Mostrar comentarios</button>
-                  <div class="comment-list mt-3" id="comment-list-${post.id}" style="display: none">
+              <button class="btn btn-outline-dark" name="comentario${post._id}" data-id="${post._id}" value="${post._id}" id="toggle-comments-btn-${post._id}">Mostrar comentarios</button>
+                  <div class="comment-list mt-3" id="comment-list-${post._id}" style="display: none">
                     <div class="comment-item">
                       <strong>María Gómez:</strong>
                       <p>¡Gran artículo! Los consejos son muy útiles, especialmente para mejorar la agilidad.</p>
@@ -175,7 +211,7 @@ document
         console.log(data);
         data.listarPublicaciones.forEach((post) => {
           contenido.innerHTML += `
-          <div class="article card mb-4 shadow-sm" id="cardPost-${post.id}">
+       <div class="article card mb-4 shadow-sm" id="cardPost-${post.id}">
                 <!-- Imagen del post -->
                 <img
                   src="https://universidadeuropea.com/resources/media/images/241009-master-alto-rendimiento-dep.2e16d0ba.fill-767x384.jpg"
@@ -191,16 +227,17 @@ document
                   ${post.sub_titulo}
                   </p>
                   <p id="full-content-${post.id}" class="hidden-content" style="display: none;">
-                  ${post.contenido_publicacion}
+                     ${post.contenido_publicacion}
                   </p>
                   <button class="btn btn-primary" id="read-more-btn-${post.id}">Leer más</button>
                 </div>
               
                 <!-- Sección de Comentarios -->
+
                 <div class="card-footer">
                   <h5>Comentarios</h5>
-                  <button class="btn btn-outline-dark" id="toggle-comments-btn-${post.id}">Mostrar comentarios</button>
-                  <div class="comment-list mt-3" id="comment-list-${post.id}" style="display: none">
+              <button class="btn btn-outline-dark" name="comentario${post._id}" data-id="${post._id}" value="${post._id}" id="toggle-comments-btn-${post._id}">Mostrar comentarios</button>
+                  <div class="comment-list mt-3" id="comment-list-${post._id}" style="display: none">
                     <div class="comment-item">
                       <strong>María Gómez:</strong>
                       <p>¡Gran artículo! Los consejos son muy útiles, especialmente para mejorar la agilidad.</p>
@@ -236,7 +273,7 @@ document.getElementById("btnTenis").addEventListener("click", function (event) {
       console.log(data);
       data.listarPublicaciones.forEach((post) => {
         contenido.innerHTML += `
-          <div class="article card mb-4 shadow-sm" id="cardPost-${post.id}">
+         <div class="article card mb-4 shadow-sm" id="cardPost-${post.id}">
                 <!-- Imagen del post -->
                 <img
                   src="https://universidadeuropea.com/resources/media/images/241009-master-alto-rendimiento-dep.2e16d0ba.fill-767x384.jpg"
@@ -252,16 +289,17 @@ document.getElementById("btnTenis").addEventListener("click", function (event) {
                   ${post.sub_titulo}
                   </p>
                   <p id="full-content-${post.id}" class="hidden-content" style="display: none;">
-                       ${post.contenido_publicacion}
+                     ${post.contenido_publicacion}
                   </p>
                   <button class="btn btn-primary" id="read-more-btn-${post.id}">Leer más</button>
                 </div>
               
                 <!-- Sección de Comentarios -->
+
                 <div class="card-footer">
                   <h5>Comentarios</h5>
-                  <button class="btn btn-outline-dark" id="toggle-comments-btn-${post.id}">Mostrar comentarios</button>
-                  <div class="comment-list mt-3" id="comment-list-${post.id}" style="display: none">
+              <button class="btn btn-outline-dark" name="comentario${post._id}" data-id="${post._id}" value="${post._id}" id="toggle-comments-btn-${post._id}">Mostrar comentarios</button>
+                  <div class="comment-list mt-3" id="comment-list-${post._id}" style="display: none">
                     <div class="comment-item">
                       <strong>María Gómez:</strong>
                       <p>¡Gran artículo! Los consejos son muy útiles, especialmente para mejorar la agilidad.</p>
@@ -299,7 +337,7 @@ document
         console.log(data);
         data.listarPublicaciones.forEach((post) => {
           contenido.innerHTML += `
-          <div class="article card mb-4 shadow-sm" id="cardPost-${post.id}">
+         <div class="article card mb-4 shadow-sm" id="cardPost-${post.id}">
                 <!-- Imagen del post -->
                 <img
                   src="https://universidadeuropea.com/resources/media/images/241009-master-alto-rendimiento-dep.2e16d0ba.fill-767x384.jpg"
@@ -315,16 +353,17 @@ document
                   ${post.sub_titulo}
                   </p>
                   <p id="full-content-${post.id}" class="hidden-content" style="display: none;">
-                      ${post.contenido_publicacion}
+                     ${post.contenido_publicacion}
                   </p>
                   <button class="btn btn-primary" id="read-more-btn-${post.id}">Leer más</button>
                 </div>
               
                 <!-- Sección de Comentarios -->
+
                 <div class="card-footer">
                   <h5>Comentarios</h5>
-                  <button class="btn btn-outline-dark" id="toggle-comments-btn-${post.id}">Mostrar comentarios</button>
-                  <div class="comment-list mt-3" id="comment-list-${post.id}" style="display: none">
+              <button class="btn btn-outline-dark" name="comentario${post._id}" data-id="${post._id}" value="${post._id}" id="toggle-comments-btn-${post._id}">Mostrar comentarios</button>
+                  <div class="comment-list mt-3" id="comment-list-${post._id}" style="display: none">
                     <div class="comment-item">
                       <strong>María Gómez:</strong>
                       <p>¡Gran artículo! Los consejos son muy útiles, especialmente para mejorar la agilidad.</p>
@@ -350,3 +389,11 @@ document
         });
       });
   });
+
+// Evento de mostrar comentarios pos id del post
+/*
+let boton = document
+  .getElementById("nada")
+  .addEventListener("click", (req, res) => {
+    console.log("El tales es: " + botonValue);
+  });  */
