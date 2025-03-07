@@ -187,3 +187,34 @@ h3 {
   color: #333;
   display: block;
 }
+
+/*===========================================================================*/
+
+/* Estilos para el tema claro */
+body {
+  background-color: #ffffff;
+  color: #000000;
+  font-family: Arial, sans-serif;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+/* Estilos para el tema oscuro */
+body.dark-theme {
+  background-color: #333333;
+}
+
+button.dark-theme {
+  background-color: #555555;
+}

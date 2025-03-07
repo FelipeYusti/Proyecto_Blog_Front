@@ -2,6 +2,33 @@ let contenido = document.querySelector("#contenido");
 const api1 = "http://127.0.0.1:4000/api/publicaciones";
 //let bntFutbol = document.querySelector("#btnFutbol");
 let botonValue = "";
+let idPostForComments = "";
+
+// Funcionalidad del tema
+
+const button = document.getElementById("theme-toggle");
+
+// Cambiar tema de la pagina
+// Comprobar el tema actual y aplicarlo
+const currentTheme = localStorage.getItem("theme") || "light";
+
+if (currentTheme === "dark") {
+  document.body.classList.add("dark-theme");
+  button.classList.add("dark-theme");
+}
+
+button.addEventListener("click", () => {
+  // Alternar el tema
+  if (document.body.classList.contains("dark-theme")) {
+    document.body.classList.remove("dark-theme");
+    button.classList.remove("dark-theme");
+    localStorage.setItem("theme", "light");
+  } else {
+    document.body.classList.add("dark-theme");
+    button.classList.add("dark-theme");
+    localStorage.setItem("theme", "dark");
+  }
+});
 
 //Listar todos
 
@@ -33,8 +60,8 @@ document.addEventListener("DOMContentLoaded", function () {
                   <button class="btn btn-outline-dark" data-id="${post._id}" value="${post._id}" id="toggle-comments-btn-${post._id}">Mostrar comentarios</button>
                   <div class="comment-list mt-3" id="comment-list-${post._id}" style="display: none"></div>
                   <div class="comment-input mt-3">
-                    <form>
-                      <textarea class="form-control" id="commentText" rows="3" placeholder="Escribe tu comentario aquí..."></textarea>
+                    <form id="frmComentario">
+                      <textarea class="form-control"  id="commentText" rows="3" placeholder="Escribe tu comentario aquí..."></textarea>
                       <button type="submit" class="btn btn-success mt-2">Enviar Comentario</button>
                     </form>
                   </div>
@@ -49,7 +76,10 @@ document.addEventListener("DOMContentLoaded", function () {
           const fullContent = document.getElementById(`full-content-${postId}`);
           const summary = document.getElementById(`summary-${postId}`);
 
-          if (fullContent.style.display === "none" || fullContent.style.display === "") {
+          if (
+            fullContent.style.display === "none" ||
+            fullContent.style.display === ""
+          ) {
             fullContent.style.display = "block";
             summary.style.display = "none";
             event.target.textContent = "Leer menos";
@@ -60,9 +90,14 @@ document.addEventListener("DOMContentLoaded", function () {
           }
         }
 
-        if (event.target && event.target.id.startsWith("toggle-comments-btn-")) {
+        if (
+          event.target &&
+          event.target.id.startsWith("toggle-comments-btn-")
+        ) {
           const postId = event.target.getAttribute("data-id");
-          const contenidoComentario = document.getElementById(`comment-list-${postId}`);
+          const contenidoComentario = document.getElementById(
+            `comment-list-${postId}`
+          );
           const botonValue = event.target.value;
 
           fetch(api1 + `/obtenerComentarios/${botonValue}`)
@@ -89,8 +124,6 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     });
 });
-
-
 
 //Botones categorias
 
@@ -348,10 +381,64 @@ document
       });
   });
 
-// Evento de mostrar comentarios pos id del post
-/*
-let boton = document
-  .getElementById("nada")
-  .addEventListener("click", (req, res) => {
-    console.log("El tales es: " + botonValue);
-  });  */
+// ============================Insercion de los comentarios =========================
+
+// Con esta funcion carga lo que quemo con DOOM
+
+document.addEventListener("DOMContentLoaded", function () {
+  const frmComentario = document
+    .getElementById("frmComentario")
+    .addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      // Obtener el valor del campo 'idPostForComments'
+
+      const idPostForComments =
+        document.getElementById("idPostForComments").value;
+      const contenidoComentario = document.getElementById("commentText").value;
+
+      console.log(`el valor es: ${idPostForComments}`);
+
+      const fecha = new Date();
+      const options = {
+        year: "numeric", // Año
+        month: "long", // Mes
+        day: "numeric", // Día
+      };
+
+      const fechaFormateada = fecha.toLocaleDateString("es-ES", options);
+      console.log(`Fecha actual: ${fechaFormateada}`);
+    });
+  fetch(api1 + "nuevoComentario", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      post_id: idPostForComments.value,
+      usuario_id: "67c1b8fd1d677275dc6fa4f7",
+      contenido_comentario: contenidoComentario.value,
+      fecha_comentario: fechaFormateada.value,
+    }),
+  })
+    .then((res) => res.json())
+    .then((res) => {
+      if (res.estado === true) {
+        Swal.fire({
+          position: "top",
+          title: "Se publico correctamente el comentario!",
+          icon: "success",
+          text: res.mensaje,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      } else {
+        Swal.fire({
+          title: "Error!",
+          icon: "error",
+          text: res.mensaje,
+        });
+      }
+      document.getElementById("frmComentario").reset();
+    });
+});
