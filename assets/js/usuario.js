@@ -13,7 +13,7 @@ let idPost = 0;
 btnClaseSesion.addEventListener("click", (e) => {
   if (!localStorage.getItem("userName")) {
     sessionStorage.clear();
-    window.location.href = "login_registro.html";
+    window.location.href = "login.html";
     history.replaceState(null, null, window.location.href);
   }
 });
@@ -29,26 +29,26 @@ document.addEventListener("click", (e) => {
         icon: "warning",
         showDenyButton: true,
         confirmButtonText: "Confirmar",
-        denyButtonText: `Cancelar`,
+        denyButtonText: `Cancelar`
       }).then((result) => {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
           fetch(api + "borrarPorId/" + id, {
-            method: "DELETE",
+            method: "DELETE"
           })
             .then((res) => res.json())
             .then((res) => {
               if (res.estado === true) {
                 Swal.fire({
                   title: "Se Elimino el post correctamente.",
-                  icon: "success",
+                  icon: "success"
                 });
                 window.location.reload();
               } else {
                 Swal.fire({
                   title: "No se pudo eliminar el post!",
                   icon: "error",
-                  text: error,
+                  text: error
                 });
               }
             })
@@ -56,7 +56,7 @@ document.addEventListener("click", (e) => {
               Swal.fire({
                 title: "El servidor no responde!",
                 icon: "error",
-                text: error,
+                text: error
               });
             });
         }
@@ -64,7 +64,7 @@ document.addEventListener("click", (e) => {
     } else if (action === "edit") {
       idPost = e.target.closest("button").getAttribute("data-id");
       fetch(api + "listarPublicId/" + idPost, {
-        method: "GET",
+        method: "GET"
       })
         .then((res) => res.json())
         .then((res) => {
@@ -78,7 +78,7 @@ document.addEventListener("click", (e) => {
           Swal.fire({
             title: "El servidor no responde!",
             icon: "error",
-            text: error,
+            text: error
           });
         });
     }
@@ -88,23 +88,21 @@ document.addEventListener("click", (e) => {
 // FORMULARIO DE LA PUBLICACION O POST
 document.getElementById("frmPost").addEventListener("submit", (e) => {
   e.preventDefault();
-  let action = document
-    .querySelector("#btnGuardar")
-    .getAttribute("data-action");
+  let action = document.querySelector("#btnGuardar").getAttribute("data-action");
 
   if (action === "save-changes-post") {
     fetch(api + "actualizarPorId/" + idPost, {
       method: "PUT",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
       },
       body: JSON.stringify({
         titulo: titulo.value,
         sub_titulo: sub_titulo.value,
         /*  rutImagen: image.value, */
         categoria: categories.value,
-        contenido_publicacion: contetenido.value,
-      }),
+        contenido_publicacion: contetenido.value
+      })
     })
       .then((res) => res.json())
       .then((res) => {
@@ -116,13 +114,13 @@ document.getElementById("frmPost").addEventListener("submit", (e) => {
             icon: "success",
             text: res.mensaje,
             showConfirmButton: false,
-            timer: 1500,
+            timer: 1500
           });
         } else {
           Swal.fire({
             title: "Error!",
             icon: "error",
-            text: res.mensaje,
+            text: res.mensaje
           });
         }
       })
@@ -130,7 +128,7 @@ document.getElementById("frmPost").addEventListener("submit", (e) => {
         Swal.fire({
           title: "El servidor no responde!",
           icon: "error",
-          text: error,
+          text: error
         });
       });
   }

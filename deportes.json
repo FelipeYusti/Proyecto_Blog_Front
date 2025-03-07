@@ -1,0 +1,137 @@
+[
+  {
+    "autor_id": "67c9fe70f7c0da0b18ecf5f1",
+    "titulo": "Historia y evolución del fútbol",
+    "sub_titulo": "Desde sus inicios hasta la era moderna",
+    "contenido_publicacion": "El fútbol ha evolucionado significativamente desde sus primeros días en Inglaterra...",
+    "categoria": "Fútbol",
+    "rutImagen": "imagenes/futbol_historia.jpg",
+    "fecha_publicacion": "2025-03-06"
+  },
+  {
+    "autor_id": "67ca0085f7c0da0b18ecf5fc",
+    "titulo": "Las reglas básicas del atletismo",
+    "sub_titulo": "Normas fundamentales en las principales disciplinas",
+    "contenido_publicacion": "El atletismo es un deporte que abarca diversas disciplinas como carreras, saltos y lanzamientos...",
+    "categoria": "Atletismo",
+    "rutImagen": "imagenes/atletismo_reglas.jpg",
+    "fecha_publicacion": "2025-03-06"
+  },
+  {
+    "autor_id": "67c9fe70f7c0da0b18ecf5f1",
+    "titulo": "Los mejores jugadores de baloncesto de la historia",
+    "sub_titulo": "Íconos que marcaron una era",
+    "contenido_publicacion": "Desde Michael Jordan hasta LeBron James, estos jugadores han dejado una huella imborrable...",
+    "categoria": "Baloncesto",
+    "rutImagen": "imagenes/baloncesto_jugadores.jpg",
+    "fecha_publicacion": "2025-03-06"
+  },
+  {
+    "autor_id": "67ca0085f7c0da0b18ecf5fc",
+    "titulo": "Grand Slam: La gloria del tenis mundial",
+    "sub_titulo": "Los torneos más prestigiosos del tenis",
+    "contenido_publicacion": "El tenis cuenta con cuatro torneos de Grand Slam: el Abierto de Australia, Roland Garros, Wimbledon y el US Open...",
+    "categoria": "Tenis",
+    "rutImagen": "imagenes/tenis_grandslam.jpg",
+    "fecha_publicacion": "2025-03-06"
+  },
+  {
+    "autor_id": "67c9fe70f7c0da0b18ecf5f1",
+    "titulo": "Estrategias tácticas en el fútbol",
+    "sub_titulo": "Cómo juegan los mejores equipos",
+    "contenido_publicacion": "Las estrategias en el fútbol varían desde defensivas hasta ofensivas, dependiendo del equipo y del entrenador...",
+    "categoria": "Fútbol",
+    "rutImagen": "imagenes/futbol_tacticas.jpg",
+    "fecha_publicacion": "2025-03-06"
+  },
+  {
+    "autor_id": "67ca0085f7c0da0b18ecf5fc",
+    "titulo": "El impacto del atletismo en la salud",
+    "sub_titulo": "Beneficios físicos y mentales",
+    "contenido_publicacion": "El atletismo no solo mejora la condición física, sino que también ayuda a reducir el estrés y la ansiedad...",
+    "categoria": "Atletismo",
+    "rutImagen": "imagenes/atletismo_salud.jpg",
+    "fecha_publicacion": "2025-03-06"
+  },
+  {
+    "autor_id": "67c9fe70f7c0da0b18ecf5f1",
+    "titulo": "Las posiciones en un equipo de baloncesto",
+    "sub_titulo": "Roles y funciones dentro del juego",
+    "contenido_publicacion": "Cada posición en el baloncesto tiene un rol específico que contribuye al éxito del equipo...",
+    "categoria": "Baloncesto",
+    "rutImagen": "imagenes/baloncesto_posiciones.jpg",
+    "fecha_publicacion": "2025-03-06"
+  },
+  {
+    "autor_id": "67ca0085f7c0da0b18ecf5fc",
+    "titulo": "La psicología en el tenis",
+    "sub_titulo": "El poder de la mente en el rendimiento deportivo",
+    "contenido_publicacion": "El tenis es un deporte que requiere gran concentración y fortaleza mental para mantenerse competitivo...",
+    "categoria": "Tenis",
+    "rutImagen": "imagenes/tenis_psicologia.jpg",
+    "fecha_publicacion": "2025-03-06"
+  },
+  {
+    "autor_id": "67c9fe70f7c0da0b18ecf5f1",
+    "titulo": "El fútbol femenino y su crecimiento mundial",
+    "sub_titulo": "La evolución del fútbol femenino en los últimos años",
+    "contenido_publicacion": "El fútbol femenino ha crecido exponencialmente en popularidad y nivel competitivo...",
+    "categoria": "Fútbol",
+    "rutImagen": "imagenes/futbol_femenino.jpg",
+    "fecha_publicacion": "2025-03-06"
+  },
+  {
+    "autor_id": "67ca0085f7c0da0b18ecf5fc",
+    "titulo": "Las zapatillas adecuadas para atletismo",
+    "sub_titulo": "Cómo elegir el mejor calzado para correr",
+    "contenido_publicacion": "El tipo de zapatilla que uses puede influir en tu rendimiento y en la prevención de lesiones...",
+    "categoria": "Atletismo",
+    "rutImagen": "imagenes/atletismo_zapatillas.jpg",
+    "fecha_publicacion": "2025-03-06"
+  },
+  {
+    "autor_id": "67c9fe70f7c0da0b18ecf5f1",
+    "titulo": "El papel del entrenador en el fútbol",
+    "sub_titulo": "Cómo influye en el rendimiento del equipo",
+    "contenido_publicacion": "Un buen entrenador puede marcar la diferencia en la estrategia y la mentalidad del equipo...",
+    "categoria": "Fútbol",
+    "rutImagen": "imagenes/futbol_entrenador.jpg",
+    "fecha_publicacion": "2025-03-06"
+  },
+  {
+    "autor_id": "67c9fe70f7c0da0b18ecf5f1",
+    "titulo": "El arte del fútbol",
+    "sub_titulo": "Técnica y pasión en el campo",
+    "contenido_publicacion": "El fútbol es más que un juego; es una representación de la cultura y la pasión de millones de personas alrededor del mundo...",
+    "categoria": "Fútbol",
+    "rutImagen": "",
+    "fecha_publicacion": "2025-03-06"
+  },
+  {
+    "autor_id": "67ca0085f7c0da0b18ecf5fc",
+    "titulo": "Atletismo: superando los límites",
+    "sub_titulo": "La evolución del rendimiento humano",
+    "contenido_publicacion": "El atletismo no solo es un deporte, sino una disciplina que lleva al ser humano a superar sus propios límites...",
+    "categoria": "Atletismo",
+    "rutImagen": "",
+    "fecha_publicacion": "2025-03-06"
+  },
+  {
+    "autor_id": "67c9fe70f7c0da0b18ecf5f1",
+    "titulo": "Los gigantes del baloncesto",
+    "sub_titulo": "Deporte y espectáculo",
+    "contenido_publicacion": "El baloncesto ha evolucionado desde sus humildes comienzos hasta convertirse en uno de los deportes más espectaculares del mundo...",
+    "categoria": "Baloncesto",
+    "rutImagen": "",
+    "fecha_publicacion": "2025-03-06"
+  },
+  {
+    "autor_id": "67ca0085f7c0da0b18ecf5fc",
+    "titulo": "El tenis: precisión y estrategia",
+    "sub_titulo": "El duelo de titanes",
+    "contenido_publicacion": "El tenis es un deporte que combina la precisión con la estrategia, creando emocionantes duelos en la pista...",
+    "categoria": "Tenis",
+    "rutImagen": "",
+    "fecha_publicacion": "2025-03-06"
+  }
+]
