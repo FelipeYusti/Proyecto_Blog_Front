@@ -61,7 +61,8 @@ document.addEventListener("DOMContentLoaded", function () {
                   <div class="comment-list mt-3" id="comment-list-${post._id}" style="display: none"></div>
                   <div class="comment-input mt-3">
                     <form id="frmComentario">
-                      <textarea class="form-control"  id="commentText" rows="3" placeholder="Escribe tu comentario aquí..."></textarea>
+                      <input type="hidden" name="idPost" id="idPost" value="${post._id}">
+                      <textarea class="form-control" name="commentText" id="commentText" rows="3" placeholder="Escribe tu comentario aquí..."></textarea>
                       <button type="submit" class="btn btn-success mt-2">Enviar Comentario</button>
                     </form>
                   </div>
@@ -386,59 +387,67 @@ document
 // Con esta funcion carga lo que quemo con DOOM
 
 document.addEventListener("DOMContentLoaded", function () {
-  const frmComentario = document
-    .getElementById("frmComentario")
-    .addEventListener("submit", function (event) {
-      event.preventDefault();
+  const frmComentario = document.getElementById("frmComentario");
+  const idPost = document.getElementById("idPost");
+  const commentText = document.getElementById("commentText");
 
-      // Obtener el valor del campo 'idPostForComments'
+  console.log(frmComentario, idPost, commentText);
+  if (!frmComentario || !idPost || !commentText) {
+    console.error("Uno o más elementos no están en el DOM");
+    return;
+  }
 
-      const idPostForComments =
-        document.getElementById("idPostForComments").value;
-      const contenidoComentario = document.getElementById("commentText").value;
+  frmComentario.addEventListener("submit", function (event) {
+    event.preventDefault();
 
-      console.log(`el valor es: ${idPostForComments}`);
+    const idPostForComments = idPost.value;
+    const contenidoComentario = commentText.value;
 
-      const fecha = new Date();
-      const options = {
-        year: "numeric", // Año
-        month: "long", // Mes
-        day: "numeric", // Día
-      };
+    console.log(`El valor de idPostForComments es: ${idPostForComments}`);
+    console.log(`El contenido del comentario es: ${contenidoComentario}`);
 
-      const fechaFormateada = fecha.toLocaleDateString("es-ES", options);
-      console.log(`Fecha actual: ${fechaFormateada}`);
-    });
-  fetch(api1 + "nuevoComentario", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      post_id: idPostForComments.value,
-      usuario_id: "67c1b8fd1d677275dc6fa4f7",
-      contenido_comentario: contenidoComentario.value,
-      fecha_comentario: fechaFormateada.value,
-    }),
-  })
-    .then((res) => res.json())
-    .then((res) => {
-      if (res.estado === true) {
-        Swal.fire({
-          position: "top",
-          title: "Se publico correctamente el comentario!",
-          icon: "success",
-          text: res.mensaje,
-          showConfirmButton: false,
-          timer: 1500,
-        });
-      } else {
-        Swal.fire({
-          title: "Error!",
-          icon: "error",
-          text: res.mensaje,
-        });
-      }
-      document.getElementById("frmComentario").reset();
-    });
+    const fecha = new Date();
+    const options = {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    };
+    const fechaFormateada = fecha.toLocaleDateString("es-ES", options);
+    console.log(`Fecha actual: ${fechaFormateada}`);
+
+    fetch(api1 + "nuevoComentario", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        post_id: idPostForComments,
+        usuario_id: "67c1b8fd1d677275dc6fa4f7",
+        contenido_comentario: contenidoComentario,
+        fecha_comentario: fechaFormateada,
+      }),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.estado === true) {
+          Swal.fire({
+            position: "top",
+            title: "Se publicó correctamente el comentario!",
+            icon: "success",
+            text: res.mensaje,
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        } else {
+          Swal.fire({
+            title: "Error!",
+            icon: "error",
+            text: res.mensaje,
+          });
+        }
+
+        frmComentario.reset();
+      })
+      .catch((err) => console.error("Error al enviar el comentario:", err));
+  });
 });
