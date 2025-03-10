@@ -11,13 +11,14 @@ let idUsuario = '';
 const button = document.getElementById("theme-toggle");
 
 // Cambiar tema de la pagina
-// Comprobar el tema actual y aplicarlo
 const currentTheme = localStorage.getItem("theme") || "light";
 
 if (currentTheme === "dark") {
   document.body.classList.add("dark-theme");
   button.classList.add("dark-theme");
 }
+
+// Esto es para el tema
 
 button.addEventListener("click", () => {
   // Alternar el tema
@@ -112,13 +113,36 @@ document.addEventListener("DOMContentLoaded", function () {
 
             data.datos.forEach((comentario) => {
 
-              const nombreUsuario = comentario.usuario_id?.userName || "Usuario desconocido";
+              // si no encuentra esa data en el json asigna un nombre por default
 
-              contenidoComentario.innerHTML += `
-              <div class="comment-item">
-                <strong>${nombreUsuario}:</strong>
-                <p>${comentario.contenido_comentario}</p>
-              </div>`;
+              const nombreUsuario = comentario.usuario_id ? comentario.usuario_id.userName : "Usuario desconocido";
+              console.log(nombreUsuario);
+
+              if (nombreUsuario == "Daniel") {
+                contenidoComentario.innerHTML += `
+                <div class="comment-item">
+                  <div class="row">
+                    <div class="col-8">
+                      <strong>${nombreUsuario}:</strong>
+                      <p>${comentario.contenido_comentario}</p>
+                    </div>
+                    <div class="col-4"><button id="btnEditar${comentario._id}" ><i class="bi bi-pen"></i></button>  <button id="btnEdliminar${comentario._id}"><i class="bi bi-trash3-fill"></i></button></div>
+                  </div>
+                
+                </div>`;
+              } else {
+                contenidoComentario.innerHTML += `
+                <div class="comment-item">
+                  <div class="row">
+                    <div class="col-8">
+                      <strong>${nombreUsuario}:</strong>
+                      <p>${comentario.contenido_comentario}</p>
+                    </div>
+                    <div class="col-4"></div>
+                  </div>
+                
+                </div>`;
+              }
             });
           })
           .catch((error) => console.error("Error al procesar los comentarios:", error));
