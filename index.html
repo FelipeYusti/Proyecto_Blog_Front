@@ -9,12 +9,12 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link
-      href="https://fonts.googleapis.com/css2?family=Anton&display=swap"
       rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
     />
-    <link rel="stylesheet" href="./assets/css/styleIndex.css">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./assets/css/styleIndex.css" />
   </head>
 
   <body>
@@ -22,7 +22,12 @@
     <header class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
       <div class="container">
         <a class="navbar-brand fw-bold" href="#">🏆 Blog Deportivo</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
@@ -34,7 +39,9 @@
               <a class="nav-link" href="#"><i class="fa-solid fa-futbol"></i> Fútbol</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#"><i class="fa-solid fa-basketball-ball"></i> Baloncesto</a>
+              <a class="nav-link" href="#"
+                ><i class="fa-solid fa-basketball-ball"></i> Baloncesto</a
+              >
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#"><i class="fa-solid fa-running"></i> Atletismo</a>
@@ -43,17 +50,35 @@
               <a class="nav-link" href="#"><i class="fa-solid fa-table-tennis"></i> Tenis</a>
             </li>
           </ul>
-    
+
           <!-- Menú de usuario mejorado -->
           <div class="dropdown user-menu">
-            <button class="btn btn-light dropdown-toggle d-flex align-items-center gap-2" type="button" data-bs-toggle="dropdown">
-              <img src="https://previews.123rf.com/images/yupiramos/yupiramos1705/yupiramos170514716/77987175-dise%C3%B1o-gr%C3%A1fico-del-ejemplo-del-vector-del-icono-del-perfil-del-hombre-joven.jpg" alt="Usuario" class="rounded-circle">
+            <button
+              class="btn btn-light dropdown-toggle d-flex align-items-center gap-2"
+              type="button"
+              data-bs-toggle="dropdown"
+            >
+              <img
+                src="https://previews.123rf.com/images/yupiramos/yupiramos1705/yupiramos170514716/77987175-dise%C3%B1o-gr%C3%A1fico-del-ejemplo-del-vector-del-icono-del-perfil-del-hombre-joven.jpg"
+                alt="Usuario"
+                class="rounded-circle"
+              />
               <span id="nameUser"></span>
             </button>
             <ul class="dropdown-menu dropdown-menu-end">
-              <li><a class="dropdown-item" href="#"><i class="bi bi-person-fill"></i> Perfil</a></li>
-              <li><a class="dropdown-item" href="/mispost.html"><i class="bi bi-archive"></i> Mis posts</a></li>
-              <li ><a  class="dropdown-item text-danger" id="btnCerrarSesion" href="#"><i class="bi bi-box-arrow-in-left"></i> Sing Out </a> </li>
+              <li>
+                <a class="dropdown-item" href="#"><i class="bi bi-person-fill"></i> Perfil</a>
+              </li>
+              <li>
+                <a id="misPost" class="dropdown-item" href="/mispost.html"
+                  ><i class="bi bi-archive"></i> Mis posts</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item text-danger" id="btnCerrarSesion" href="#"
+                  ><i class="bi bi-box-arrow-in-left"></i> Sing Out
+                </a>
+              </li>
             </ul>
           </div>
         </div>
@@ -67,61 +92,127 @@
         <div class="col-md-8">
           <div class="hero-section text-center mb-4">
             <h2>Bienvenidos al Blog Deportivo</h2>
-            <p>
-              Explora las últimas noticias y consejos sobre el mundo deportivo.
-            </p>
+            <p>Explora las últimas noticias y consejos sobre el mundo deportivo.</p>
           </div>
 
-          <div class="row mb-2" style=" display: flex; flex-direction: column; margin-right: 380px;" >
+          <div class="row mb-2" style="display: flex; flex-direction: column; margin-right: 380px">
             <div class="col-4">
-                <div class="category-content">
-                  
-                  <button type="submit" id="agregarPost" class="btn btn-info category-card" data-bs-toggle="modal" data-bs-target="#addPostModal">
-                    <i class="bi bi-plus-circle"></i>
-                    <span  >Nuevo Post</span>
-                  </button>
-                </div>
+              <div class="category-content">
+                <button
+                  type="submit"
+                  id="agregarPost"
+                  class="btn btn-info category-card"
+                  data-bs-toggle="modal"
+                  data-bs-target="#addPostModal"
+                >
+                  <i class="bi bi-plus-circle"></i>
+                  <span>Nuevo Post</span>
+                </button>
+              </div>
             </div>
-            
           </div>
-          <div class="modal fade" id="addPostModal" tabindex="-1" aria-labelledby="addPostLabel" aria-hidden="true">
-            <div class="modal-dialog">
+          <div
+            class="modal fade"
+            id="addPostModal"
+            data-bs-backdrop="static"
+            data-bs-keyboard="false"
+            tabindex="-1"
+            aria-labelledby="addPostLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog modal-lg">
               <div class="modal-content bg-dark text-white">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="addPostLabel">Agregar Nuevo Post</h5>
-                  <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                  <h5 class="modal-title" id="addPostLabel">Nuevo Post</h5>
+                  <button
+                    type="button"
+                    class="btn-close btn-close-white"
+                    data-bs-dismiss="modal"
+                  ></button>
                 </div>
                 <div class="modal-body">
-                  <form id="frmPost">
-                    <div class="mb-3">
-                      <label for="postTitle" class="form-label">Título de la Publicacion </label>
-                      <input type="text" class="form-control bg-secondary text-white" id="postTitle" required />
+                  <form id="frmPost" enctype="multipart/form-data">
+                    <div class="container-fluid mt-2">
+                      <div class="row mb-3">
+                        <div class="col-md-6">
+                          <label for="postTitle" class="form-label">Title </label>
+                          <input
+                            type="text"
+                            class="form-control bg-secondary text-white"
+                            id="postTitle"
+                            required
+                          />
+                        </div>
+                        <div class="col-md-6">
+                          <label for="postSubTitle" class="form-label">Subtitle </label>
+                          <input
+                            type="text"
+                            class="form-control bg-secondary text-white"
+                            id="postSubTitle"
+                            required
+                          />
+                        </div>
+                      </div>
+
+                      <div class="row mb-3">
+                        <div class="col-md-6">
+                          <label for="postContent" class="form-label">Imagen (opcional)</label>
+                          <input
+                            type="file"
+                            class="form-control"
+                            name=""
+                            id="postImage"
+                            accept="image/*"
+                            onchange="previewImage(event)"
+                          />
+                          <div class="mt-3 text-center">
+                            <img
+                              id="preview"
+                              src="#"
+                              alt="Previsualización"
+                              class="img-fluid d-none"
+                              style="max-height: 700px"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <label for="postContent" class="form-label">Category</label>
+                          <select
+                            class="form-select form-style"
+                            id="categories"
+                            aria-describedby="validationServer04Feedback"
+                            required
+                          >
+                            <option selected disabled value="">Categories...</option>
+                            <option disabled>...</option>
+                            <option value="Fútbol">Futbol</option>
+                            <option value="Tenis">Tenis</option>
+                            <option value="Atletismo">Atletismo</option>
+                            <option value="Basket">Baloncesto</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="row mb-3">
+                        <div class="col-md-12">
+                          <label for="postContent" class="form-label">Contenido</label>
+                          <textarea
+                            class="form-control bg-secondary text-white"
+                            id="postContent"
+                            rows="4"
+                            required
+                          ></textarea>
+                        </div>
+                      </div>
                     </div>
-                    <div class="mb-3">
-                      <label for="postContent" class="form-label">Imagen (opcional)</label>
-                      <input type="file"  class="form-control" name="" id="postImage">
-                    </div>
-                    <div class="mb-3">
-                      <label for="postContent" class="form-label">Category</label>
-                      <select
-                      class="form-select form-style"
-                      id="categories"
-                      aria-describedby="validationServer04Feedback"
-                      required
+                    <button
+                      type="submit"
+                      class="btn btn-primary"
+                      id="btnGuardar"
+                      data-action="public-post"
                     >
-                      <option selected disabled value="">Categories...</option>
-                      <option>...</option>
-                      <option value="Fútbol">Futbol</option>
-                      <option value="Tenis">Tenis</option>
-                      <option value="Atletismo">Atletismo</option>
-                      <option value="Basket">Baloncesto</option>
-                    </select>
-                    </div>
-                    <div class="mb-3">
-                      <label for="postContent" class="form-label">Contenido</label>
-                      <textarea class="form-control bg-secondary text-white" id="postContent" rows="4" required></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary" id="btnGuardar" data-action="public-post" ><i class="bi bi-globe"></i> Publicar </button>
+                      <i class="bi bi-globe"></i> Publicar
+                    </button>
                   </form>
                 </div>
               </div>
@@ -137,30 +228,36 @@
               id="imagenPost"
               onerror="this.style.display='block'"
             />
-          
+
             <div class="card-body">
               <h3 class="card-title">Los mejores consejos para mejorar tu rendimiento en fútbol</h3>
               <p class="text-muted">Publicado el 25 de febrero de 2025 por Juan Pérez</p>
               <p id="summary" class="card-text">
-                Descubre cómo mejorar tu agilidad y resistencia en el fútbol con estos sencillos ejercicios...
+                Descubre cómo mejorar tu agilidad y resistencia en el fútbol con estos sencillos
+                ejercicios...
               </p>
               <p id="full-content" class="hidden-content">
-                Para mejorar tu rendimiento en el fútbol, es fundamental centrarse en el entrenamiento de
-                resistencia y agilidad. Ejercicios como los cambios de dirección, sprints y entrenamiento con
-                balón pueden marcar la diferencia en tu juego. Además, es clave mantener una buena
-                alimentación y descanso adecuado para rendir al máximo.
+                Para mejorar tu rendimiento en el fútbol, es fundamental centrarse en el
+                entrenamiento de resistencia y agilidad. Ejercicios como los cambios de dirección,
+                sprints y entrenamiento con balón pueden marcar la diferencia en tu juego. Además,
+                es clave mantener una buena alimentación y descanso adecuado para rendir al máximo.
               </p>
               <button class="btn btn-primary" id="read-more-btn">Leer más</button>
             </div>
-          
+
             <!-- Sección de Comentarios -->
             <div class="card-footer">
               <h5>Comentarios</h5>
-              <button class="btn btn-outline-dark" id="toggle-comments-btn">Mostrar comentarios</button>
+              <button class="btn btn-outline-dark" id="toggle-comments-btn">
+                Mostrar comentarios
+              </button>
               <div class="comment-list mt-3" id="comment-list" style="display: none">
                 <div class="comment-item">
                   <strong>María Gómez:</strong>
-                  <p>¡Gran artículo! Los consejos son muy útiles, especialmente para mejorar la agilidad.</p>
+                  <p>
+                    ¡Gran artículo! Los consejos son muy útiles, especialmente para mejorar la
+                    agilidad.
+                  </p>
                 </div>
                 <div class="comment-item">
                   <strong>Carlos Martínez:</strong>
@@ -180,8 +277,6 @@
               </div>
             </div>
           </div>
-          
-          
         </div>
 
         <!-- Barra lateral -->
@@ -193,7 +288,10 @@
               <div class="col-6">
                 <a href="#" class="category-card">
                   <div class="category-content">
-                    <img src="https://images.emojiterra.com/openmoji/v13.1/512px/26bd.png" alt="Fútbol">
+                    <img
+                      src="https://images.emojiterra.com/openmoji/v13.1/512px/26bd.png"
+                      alt="Fútbol"
+                    />
                     <span>Fútbol</span>
                   </div>
                 </a>
@@ -202,7 +300,10 @@
               <div class="col-6">
                 <a href="#" class="category-card">
                   <div class="category-content">
-                    <img src="https://cdn-icons-png.flaticon.com/512/4354/4354908.png" alt="Baloncesto">
+                    <img
+                      src="https://cdn-icons-png.flaticon.com/512/4354/4354908.png"
+                      alt="Baloncesto"
+                    />
                     <span>Baloncesto</span>
                   </div>
                 </a>
@@ -211,7 +312,10 @@
               <div class="col-6">
                 <a href="#" class="category-card">
                   <div class="category-content">
-                    <img src="https://cdn-icons-png.flaticon.com/512/2262/2262929.png" alt="Atletismo">
+                    <img
+                      src="https://cdn-icons-png.flaticon.com/512/2262/2262929.png"
+                      alt="Atletismo"
+                    />
                     <span>Atletismo</span>
                   </div>
                 </a>
@@ -220,7 +324,10 @@
               <div class="col-6">
                 <a href="#" class="category-card">
                   <div class="category-content">
-                    <img src="https://cdn-icons-png.flaticon.com/512/5210/5210328.png" alt="Tenis">
+                    <img
+                      src="https://cdn-icons-png.flaticon.com/512/5210/5210328.png"
+                      alt="Tenis"
+                    />
                     <span>Tenis</span>
                   </div>
                 </a>
@@ -228,6 +335,7 @@
             </div>
           </div>
         </div>
+      </div>
     </section>
 
     <!-- Pie de página -->
@@ -236,11 +344,10 @@
     </footer>
 
     <!-- Scripts -->
-     
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="./assets/js/usuario.js"></script>
     <script src="./assets/js/index.js"></script>
-
+    <script src="./assets/js/usuario.js"></script>
   </body>
 </html>
