@@ -103,19 +103,26 @@ document.addEventListener("DOMContentLoaded", function () {
         const contenidoComentario = document.getElementById(`comment-list-${postId}`);
 
         fetch(api1 + `/obtenerComentarios/${postId}`)
-          .then((data) => data.json())
+          .then((response) => response.json())
           .then((data) => {
+
+            console.log(data);
+
             contenidoComentario.innerHTML = "";
-            data.datos.forEach((comentarios) => {
-              const nombreUsuario = comentarios.usuario_id ? comentarios.usuario_id.userName : "Usuario desconocido";
+
+            data.datos.forEach((comentario) => {
+
+              const nombreUsuario = comentario.usuario_id?.userName || "Usuario desconocido";
 
               contenidoComentario.innerHTML += `
-                  <div class="comment-item">
-                    <strong>${nombreUsuario}:</strong>
-                    <p>${comentarios.contenido_comentario}</p>
-                  </div>`;
+              <div class="comment-item">
+                <strong>${nombreUsuario}:</strong>
+                <p>${comentario.contenido_comentario}</p>
+              </div>`;
             });
-          });
+          })
+          .catch((error) => console.error("Error al procesar los comentarios:", error));
+
 
         if (contenidoComentario.style.display === "none") {
           contenidoComentario.style.display = "block";
@@ -126,6 +133,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       });
     });
+
   }
 
   function asignarEventosFormulario() {
@@ -147,7 +155,7 @@ document.addEventListener("DOMContentLoaded", function () {
           },
           body: JSON.stringify({
             post_id: postId,
-            usuario_id: "67c1b8fd1d677275dc6fa4f7",
+            usuario_id: "67ca06bf422f0ceaa5b33ecc",
             contenido_comentario: commentText,
             fecha_comentario: fechaFormateada,
           }),
@@ -257,19 +265,26 @@ document.addEventListener("DOMContentLoaded", function () {
         const contenidoComentario = document.getElementById(`comment-list-${postId}`);
 
         fetch(api1 + `/obtenerComentarios/${postId}`)
-          .then((data) => data.json())
+          .then((response) => response.json())
           .then((data) => {
+
+            console.log(data);
+
             contenidoComentario.innerHTML = "";
-            data.datos.forEach((comentarios) => {
-              const nombreUsuario = comentarios.usuario_id ? comentarios.usuario_id.userName : "Usuario desconocido";
+
+            data.datos.forEach((comentario) => {
+
+              const nombreUsuario = comentario.usuario_id?.userName || "Usuario desconocido";
 
               contenidoComentario.innerHTML += `
-                    <div class="comment-item">
-                      <strong>${nombreUsuario}:</strong>
-                      <p>${comentarios.contenido_comentario}</p>
-                    </div>`;
+                <div class="comment-item">
+                  <strong>${nombreUsuario}:</strong>
+                  <p>${comentario.contenido_comentario}</p>
+                </div>`;
             });
-          });
+          })
+          .catch((error) => console.error("Error al procesar los comentarios:", error));
+
 
         if (contenidoComentario.style.display === "none") {
           contenidoComentario.style.display = "block";
@@ -280,6 +295,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       });
     });
+
   }
 
   function asignarEventosFormulario() {
@@ -301,7 +317,7 @@ document.addEventListener("DOMContentLoaded", function () {
           },
           body: JSON.stringify({
             post_id: postId,
-            usuario_id: "67c1b8fd1d677275dc6fa4f7",
+            usuario_id: "67ca06bf422f0ceaa5b33ecc",
             contenido_comentario: commentText,
             fecha_comentario: fechaFormateada,
           }),
@@ -408,19 +424,26 @@ document.addEventListener("DOMContentLoaded", function () {
         const contenidoComentario = document.getElementById(`comment-list-${postId}`);
 
         fetch(api1 + `/obtenerComentarios/${postId}`)
-          .then((data) => data.json())
+          .then((response) => response.json())
           .then((data) => {
+
+            console.log(data);
+
             contenidoComentario.innerHTML = "";
-            data.datos.forEach((comentarios) => {
-              const nombreUsuario = comentarios.usuario_id ? comentarios.usuario_id.userName : "Usuario desconocido";
+
+            data.datos.forEach((comentario) => {
+
+              const nombreUsuario = comentario.usuario_id?.userName || "Usuario desconocido";
 
               contenidoComentario.innerHTML += `
-                    <div class="comment-item">
-                      <strong>${nombreUsuario}:</strong>
-                      <p>${comentarios.contenido_comentario}</p>
-                    </div>`;
+                <div class="comment-item">
+                  <strong>${nombreUsuario}:</strong>
+                  <p>${comentario.contenido_comentario}</p>
+                </div>`;
             });
-          });
+          })
+          .catch((error) => console.error("Error al procesar los comentarios:", error));
+
 
         if (contenidoComentario.style.display === "none") {
           contenidoComentario.style.display = "block";
@@ -431,6 +454,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       });
     });
+
   }
 
   function asignarEventosFormulario() {
@@ -452,7 +476,7 @@ document.addEventListener("DOMContentLoaded", function () {
           },
           body: JSON.stringify({
             post_id: postId,
-            usuario_id: "67c1b8fd1d677275dc6fa4f7",
+            usuario_id: "67ca06bf422f0ceaa5b33ecc",
             contenido_comentario: commentText,
             fecha_comentario: fechaFormateada,
           }),
@@ -560,19 +584,26 @@ document.addEventListener("DOMContentLoaded", function () {
         const contenidoComentario = document.getElementById(`comment-list-${postId}`);
 
         fetch(api1 + `/obtenerComentarios/${postId}`)
-          .then((data) => data.json())
+          .then((response) => response.json())
           .then((data) => {
+
+            console.log(data);
+
             contenidoComentario.innerHTML = "";
-            data.datos.forEach((comentarios) => {
-              const nombreUsuario = comentarios.usuario_id ? comentarios.usuario_id.userName : "Usuario desconocido";
+
+            data.datos.forEach((comentario) => {
+
+              const nombreUsuario = comentario.usuario_id?.userName || "Usuario desconocido";
 
               contenidoComentario.innerHTML += `
-                    <div class="comment-item">
-                      <strong>${nombreUsuario}:</strong>
-                      <p>${comentarios.contenido_comentario}</p>
-                    </div>`;
+                <div class="comment-item">
+                  <strong>${nombreUsuario}:</strong>
+                  <p>${comentario.contenido_comentario}</p>
+                </div>`;
             });
-          });
+          })
+          .catch((error) => console.error("Error al procesar los comentarios:", error));
+
 
         if (contenidoComentario.style.display === "none") {
           contenidoComentario.style.display = "block";
@@ -583,6 +614,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       });
     });
+
   }
 
   function asignarEventosFormulario() {
@@ -604,7 +636,7 @@ document.addEventListener("DOMContentLoaded", function () {
           },
           body: JSON.stringify({
             post_id: postId,
-            usuario_id: "67c1b8fd1d677275dc6fa4f7",
+            usuario_id: "67ca06bf422f0ceaa5b33ecc",
             contenido_comentario: commentText,
             fecha_comentario: fechaFormateada,
           }),
@@ -670,6 +702,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     <button class="btn btn-outline-dark toggle-comments-btn" data-id="${post._id}">Mostrar comentarios</button>
                     <div class="comment-list mt-3" id="comment-list-${post._id}" style="display: none"></div>
                     <div class="comment-input mt-3">
+
                       <form class="frmComentario" data-id="${post._id}">
                         <textarea class="form-control commentText" rows="3" placeholder="Escribe tu comentario aquí..."></textarea>
                         <button type="submit" class="btn btn-success mt-2">Enviar Comentario</button>
@@ -680,7 +713,7 @@ document.addEventListener("DOMContentLoaded", function () {
             `;
           });
 
-          // 🔥 Reasignar eventos después de insertar los elementos
+
           asignarEventosPublicaciones();
           asignarEventosFormulario();
         });
@@ -710,21 +743,27 @@ document.addEventListener("DOMContentLoaded", function () {
         const postId = this.getAttribute("data-id");
         const contenidoComentario = document.getElementById(`comment-list-${postId}`);
 
-
         fetch(api1 + `/obtenerComentarios/${postId}`)
-          .then((data) => data.json())
+          .then((response) => response.json())
           .then((data) => {
+
+            console.log(data);
+
             contenidoComentario.innerHTML = "";
-            data.datos.forEach((comentarios) => {
-              const nombreUsuario = comentarios.usuario_id ? comentarios.usuario_id.userName : "Usuario desconocido";
+
+            data.datos.forEach((comentario) => {
+
+              const nombreUsuario = comentario.usuario_id?.userName || "Usuario desconocido";
 
               contenidoComentario.innerHTML += `
-                    <div class="comment-item">
-                      <strong>${nombreUsuario}:</strong>
-                      <p>${comentarios.contenido_comentario}</p>
-                    </div>`;
+                <div class="comment-item">
+                  <strong>${nombreUsuario}:</strong>
+                  <p>${comentario.contenido_comentario}</p>
+                </div>`;
             });
-          });
+          })
+          .catch((error) => console.error("Error al procesar los comentarios:", error));
+
 
         if (contenidoComentario.style.display === "none") {
           contenidoComentario.style.display = "block";
@@ -735,6 +774,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       });
     });
+
   }
 
   function asignarEventosFormulario() {
@@ -756,7 +796,7 @@ document.addEventListener("DOMContentLoaded", function () {
           },
           body: JSON.stringify({
             post_id: postId,
-            usuario_id: "67c1b8fd1d677275dc6fa4f7",
+            usuario_id: "67ca06bf422f0ceaa5b33ecc",
             contenido_comentario: commentText,
             fecha_comentario: fechaFormateada,
           }),
