@@ -183,17 +183,31 @@ document.addEventListener("DOMContentLoaded", function () {
               .catch((error) => console.error("Error al eliminar el comentario:", error));
           }
 
-          if (event.target.closest(".btnEditar")) {
-            const idEditar = event.target.closest(".btnEditar").dataset.id;
-            console.log("Editar comentario:", idEditar);
 
-            fetch(`${api2}/listarPorId/${idEditar}`)
-              .then((data) => data.json())
-              .then((data) => {
-                console.log(data);
-              })
-              .catch((error) => console.error("Error al eliminar el comentario:", error));
-          }
+          contenidoComentario.addEventListener("click", (event) => {
+            if (event.target.closest(".btnEditar")) {
+              const idEditar = event.target.closest(".btnEditar").dataset.id;
+
+              console.log("Editar comentario:", idEditar);
+
+              fetch(`${api2}/listarPorId/${idEditar}`)
+                .then((data) => data.json())
+                .then((data) => {
+                  console.log(data);
+                  const comentario = data.Comentario[0];
+
+                  document.getElementById("comentarioUpdate").value = comentario.contenido_comentario;
+
+                  let modal = new bootstrap.Modal(document.getElementById("editComentario"));
+                  modal.show();
+                })
+                .catch((error) => {
+                  console.error("Error al obtener el comentario:", error);
+                });
+
+            }
+          });
+
         });
 
         if (contenidoComentario.style.display === "none") {
