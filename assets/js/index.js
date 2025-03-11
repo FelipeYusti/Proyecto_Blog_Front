@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 <div class="comment-list mt-3" id="comment-list-${post._id}" style="display: none"></div>
                 <div class="comment-input mt-3">
                   <form class="frmComentario" data-id="${post._id}">
-                    <textarea class="form-control commentText" rows="3" placeholder="Escribe tu comentario aquí..."></textarea>
+                    <textarea class="form-control commentText" rows="3"  placeholder="Escribe tu comentario aquí..."></textarea>
                     <button type="submit" class="btn btn-success mt-2">Enviar Comentario</button>
                   </form>
                 </div>
@@ -108,7 +108,12 @@ document.addEventListener("DOMContentLoaded", function () {
         );
 
         fetch(api1 + `/obtenerComentarios/${postId}`)
-          .then((response) => response.json())
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error(`Error HTTP: ${response.status}`);
+            }
+            return response.json();
+          })
           .then((data) => {
             console.log(data);
 
@@ -116,58 +121,80 @@ document.addEventListener("DOMContentLoaded", function () {
 
             if (data.datos && data.datos.length > 0) {
               data.datos.forEach((comentario) => {
-                //Si no se encuentra el usuario, pone usuario desconocido
-                const nombreUsuario = comentario.usuario_id
-                  ? comentario.usuario_id.userName
-                  : "Usuario desconocido";
+                const nombreUsuario = comentario.usuario_id?.userName || "Usuario desconocido";
 
                 let comentarioHTML = `
-                <div class="comment-item">
-                  <div class="row">
-                    <div class="col-8">
-                      <strong>${nombreUsuario}:</strong>
-                      <p>${comentario.contenido_comentario}</p>
-                    </div>
-                    <div class="col-4">`;
+              <div class="comment-item">
+                <div class="row">
+                  <div class="col-8">
+                    <strong>${nombreUsuario}:</strong>
+                    <p>${comentario.contenido_comentario}</p>
+                  </div>
+                  <div class="col-4">`;
 
-                //Validacion del usuario ====================================================================
-
-                if (nombreUsuario == "Daniel") {
+                if (nombreUsuario === "Daniel") {
                   comentarioHTML += `
-                      <button id="btnEditar${comentario._id}" ><i class="bi bi-pen"></i></button>
-                      <button id="btnEliminar${comentario._id}"><i class="bi bi-trash3-fill"></i></button>
-                    </div>
+                    <button class="btnEditar" data-id="${comentario._id}"><i class="bi bi-pen"></i></button>
+                    <button class="btnEliminar" data-id="${comentario._id}"><i class="bi bi-trash3-fill"></i></button>
                   </div>
                 </div>
-                `;
+              </div>`;
                 } else {
                   comentarioHTML += `</div></div></div>`;
                 }
-                contenidoComentario.innerHTML += comentarioHTML;
-                /*
-                document
-                  .getElementById(`btnEliminar${comentario._id}`)
-                  .addEventListener("click", () => {
-                    let idEliminar = comentario._id;
-                    console.log("Comentario a eliminar:", idEliminar);
-                  });
 
-        
-                document
-                  .getElementById(`btnEditar${comentario._id}`)
-                  .addEventListener("click", () => {
-                    console.log("Editar comentario:", comentario._id);
-                  
-                  }); */
+                contenidoComentario.innerHTML += comentarioHTML;
               });
             } else {
-              // Si no hay comentarios, mostrar mensaje
               contenidoComentario.innerHTML = "<p>No hay comentarios aún.</p>";
             }
           })
-          .catch((error) =>
-            console.error("Error al procesar los comentarios:", error)
-          );
+          .catch((error) => console.error("Error al procesar los comentarios:", error));
+
+        // Event delegation para los botones de editar y eliminar
+        contenidoComentario.addEventListener("click", (event) => {
+          if (event.target.closest(".btnEliminar")) {
+            const idEliminar = event.target.closest(".btnEliminar").dataset.id;
+
+            console.log("Comentario a eliminar:", idEliminar);
+
+            fetch(`${api2}/borrarPorId/${idEliminar}`, {
+              method: "DELETE",
+            })
+              .then((data) => data.json())
+              .then((data) => {
+                if (data.estado === true) {
+                  Swal.fire({
+                    position: "top",
+                    title: "Se elimino correctamente el comentario!",
+                    icon: "success",
+                    text: data.mensaje,
+                    showConfirmButton: false,
+                    timer: 1500,
+                  });
+                } else {
+                  Swal.fire({
+                    title: "Error!",
+                    icon: "error",
+                    text: data.mensaje,
+                  });
+                }
+              })
+              .catch((error) => console.error("Error al eliminar el comentario:", error));
+          }
+
+          if (event.target.closest(".btnEditar")) {
+            const idEditar = event.target.closest(".btnEditar").dataset.id;
+            console.log("Editar comentario:", idEditar);
+
+            fetch(`${api2}/listarPorId/${idEditar}`)
+              .then((data) => data.json())
+              .then((data) => {
+                console.log(data);
+              })
+              .catch((error) => console.error("Error al eliminar el comentario:", error));
+          }
+        });
 
         if (contenidoComentario.style.display === "none") {
           contenidoComentario.style.display = "block";
