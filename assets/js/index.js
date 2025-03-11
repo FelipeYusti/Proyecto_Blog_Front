@@ -130,6 +130,8 @@ document.addEventListener("DOMContentLoaded", function () {
                     </div>
                     <div class="col-4">`;
 
+                //Validacion del usuario ====================================================================
+
                 if (nombreUsuario == "Daniel") {
                   comentarioHTML += `
                       <button id="btnEditar${comentario._id}" ><i class="bi bi-pen"></i></button>
