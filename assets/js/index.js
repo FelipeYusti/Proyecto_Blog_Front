@@ -13,14 +13,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Datos de posts simulados
     fetch(api + "listarPorIdPublicacion/" + sesion.user_id, {
-      method: "GET"
+      method: "GET",
     })
       .then((res) => res.json())
       .then((res) => {
         if (res.exito === true) {
           displayPosts(res.post);
+          post = res.post;
         } else {
-          console.log("no hay post");
+          console.log("no hay post"); // pendiente de componente de avisando que no hay posts.
         }
       })
       .catch((error) => {
@@ -29,9 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Renderiza los posts en la interfaz
 
     function displayPosts(filteredPosts) {
-      //postsList.innerHTML = "";
-      let indice = 0;
-
+      postsList.innerHTML = "";
       filteredPosts.forEach((post) => {
         const postCard = document.createElement("div");
         const col = document.createElement("div");
@@ -40,14 +39,11 @@ document.addEventListener("DOMContentLoaded", () => {
         postCard.setAttribute("class", "article card mb-4 shadow-sm");
         postCard.innerHTML = `
    <!-- Imagen del post -->
-        <img
-          src="${post.rutImagen ? readImage + "" + post.rutImagen : ""}"
-          class="card-img-top"
-          alt="Imagen del post"
-          id="imagenPost"
-          onerror="this.style.display='block'"
-        />
-
+         ${
+           post.rutImagen
+             ? `<img src=" ${readImage}${post.rutImagen}" class="card-img-top" alt="Imagen del post" id="imagenPost" onerror="this.style.display='block'" />`
+             : ""
+         }
         <div class="card-body">
           <h3 class="card-title">
           ${post.titulo}
@@ -134,27 +130,26 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
     </div>
 `;
-
         col.appendChild(postCard);
         postsList.appendChild(col);
       });
     }
     // Filtros de búsqueda
-    /*  searchInput.addEventListener("input", function () {
+    searchInput.addEventListener("input", function () {
       const query = searchInput.value.toLowerCase();
-      const filteredPosts = posts.filter((post) =>
-        post.title.toLowerCase().includes(query)
+      const filteredPosts = post.filter((post) =>
+        post.titulo.toLowerCase().includes(query)
       );
       displayPosts(filteredPosts);
-    }); */
+    });
 
     // Eventos para los botones de acción
     // Ordenar por título
-    /*  document
+    document
       .getElementById("filter-title")
       .addEventListener("click", function () {
-        posts.sort((a, b) => a.title.localeCompare(b.title));
-        displayPosts(posts);
+        post.sort((a, b) => a.titulo.localeCompare(b.titulo));
+        displayPosts(post);
       });
 
     // Ordenar por fecha (simulado, en este caso sin cambios)
@@ -163,7 +158,7 @@ document.addEventListener("DOMContentLoaded", () => {
       .addEventListener("click", function () {
         alert("Ordenar por fecha aún no implementado.");
       });
- */
+
     // Inicializar la visualización
     displayPosts(post);
   }

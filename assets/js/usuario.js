@@ -119,7 +119,6 @@ document.getElementById("frmPost").addEventListener("submit", (e) => {
       frmPost.append("categoria", document.querySelector("#categories").value);
       frmPost.append("contenido_publicacion", document.querySelector("#postContent").value);
       frmPost.append("fecha_publicacion", fechaPublicacion);
-
       fetch(api + "nuevaPublicacion/", {
         method: "POST",
         body: frmPost
