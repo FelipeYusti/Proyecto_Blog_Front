@@ -4,7 +4,7 @@ const api2 = "http://127.0.0.1:4000/api/comentarios";
 //let bntFutbol = document.querySelector("#btnFutbol");
 let botonValue = "";
 let idPostForComments = "";
-let idUsuario = '';
+let idUsuario = "";
 
 // Funcionalidad del tema
 
@@ -40,7 +40,6 @@ document.addEventListener("DOMContentLoaded", function () {
     .then((data) => data.json())
     .then((data) => {
       data.listarPublicaciones.forEach((post) => {
-
         contenido.innerHTML += `
           <div class="article card mb-4 shadow-sm" id="cardPost-${post._id}">
               <img
@@ -74,7 +73,7 @@ document.addEventListener("DOMContentLoaded", function () {
         `;
       });
 
-      // Asignar eventos 
+      // Asignar eventos
 
       asignarEventosPublicaciones();
       asignarEventosFormulario();
@@ -86,7 +85,10 @@ document.addEventListener("DOMContentLoaded", function () {
         const fullContent = document.getElementById(`full-content-${postId}`);
         const summary = document.getElementById(`summary-${postId}`);
 
-        if (fullContent.style.display === "none" || fullContent.style.display === "") {
+        if (
+          fullContent.style.display === "none" ||
+          fullContent.style.display === ""
+        ) {
           fullContent.style.display = "block";
           summary.style.display = "none";
           this.textContent = "Leer menos";
@@ -101,52 +103,69 @@ document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll(".toggle-comments-btn").forEach((button) => {
       button.addEventListener("click", function () {
         const postId = this.getAttribute("data-id");
-        const contenidoComentario = document.getElementById(`comment-list-${postId}`);
+        const contenidoComentario = document.getElementById(
+          `comment-list-${postId}`
+        );
 
         fetch(api1 + `/obtenerComentarios/${postId}`)
           .then((response) => response.json())
           .then((data) => {
-
             console.log(data);
 
             contenidoComentario.innerHTML = "";
 
-            data.datos.forEach((comentario) => {
+            if (data.datos && data.datos.length > 0) {
+              data.datos.forEach((comentario) => {
+                //Si no se encuentra el usuario, pone usuario desconocido
+                const nombreUsuario = comentario.usuario_id
+                  ? comentario.usuario_id.userName
+                  : "Usuario desconocido";
 
-              // si no encuentra esa data en el json asigna un nombre por default
-
-              const nombreUsuario = comentario.usuario_id ? comentario.usuario_id.userName : "Usuario desconocido";
-              console.log(nombreUsuario);
-
-              if (nombreUsuario == "Daniel") {
-                contenidoComentario.innerHTML += `
+                let comentarioHTML = `
                 <div class="comment-item">
                   <div class="row">
                     <div class="col-8">
                       <strong>${nombreUsuario}:</strong>
                       <p>${comentario.contenido_comentario}</p>
                     </div>
-                    <div class="col-4"><button id="btnEditar${comentario._id}" ><i class="bi bi-pen"></i></button>  <button id="btnEdliminar${comentario._id}"><i class="bi bi-trash3-fill"></i></button></div>
-                  </div>
-                
-                </div>`;
-              } else {
-                contenidoComentario.innerHTML += `
-                <div class="comment-item">
-                  <div class="row">
-                    <div class="col-8">
-                      <strong>${nombreUsuario}:</strong>
-                      <p>${comentario.contenido_comentario}</p>
+                    <div class="col-4">`;
+
+                if (nombreUsuario == "Daniel") {
+                  comentarioHTML += `
+                      <button id="btnEditar${comentario._id}" ><i class="bi bi-pen"></i></button>
+                      <button id="btnEliminar${comentario._id}"><i class="bi bi-trash3-fill"></i></button>
                     </div>
-                    <div class="col-4"></div>
                   </div>
-                
-                </div>`;
-              }
-            });
+                </div>
+                `;
+                } else {
+                  comentarioHTML += `</div></div></div>`;
+                }
+                contenidoComentario.innerHTML += comentarioHTML;
+                /*
+                document
+                  .getElementById(`btnEliminar${comentario._id}`)
+                  .addEventListener("click", () => {
+                    let idEliminar = comentario._id;
+                    console.log("Comentario a eliminar:", idEliminar);
+                  });
+
+        
+                document
+                  .getElementById(`btnEditar${comentario._id}`)
+                  .addEventListener("click", () => {
+                    console.log("Editar comentario:", comentario._id);
+                  
+                  }); */
+              });
+            } else {
+              // Si no hay comentarios, mostrar mensaje
+              contenidoComentario.innerHTML = "<p>No hay comentarios aún.</p>";
+            }
           })
-          .catch((error) => console.error("Error al procesar los comentarios:", error));
-
+          .catch((error) =>
+            console.error("Error al procesar los comentarios:", error)
+          );
 
         if (contenidoComentario.style.display === "none") {
           contenidoComentario.style.display = "block";
@@ -157,7 +176,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       });
     });
-
   }
 
   function asignarEventosFormulario() {
@@ -179,7 +197,7 @@ document.addEventListener("DOMContentLoaded", function () {
           },
           body: JSON.stringify({
             post_id: postId,
-            usuario_id: "67ca06bf422f0ceaa5b33ecc",
+            usuario_id: "67c1b8fd1d677275dc6fa4f7",
             contenido_comentario: commentText,
             fecha_comentario: fechaFormateada,
           }),
@@ -209,7 +227,6 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     });
   }
-
 });
 
 //Botones categorias
@@ -271,7 +288,10 @@ document.addEventListener("DOMContentLoaded", function () {
         const fullContent = document.getElementById(`full-content-${postId}`);
         const summary = document.getElementById(`summary-${postId}`);
 
-        if (fullContent.style.display === "none" || fullContent.style.display === "") {
+        if (
+          fullContent.style.display === "none" ||
+          fullContent.style.display === ""
+        ) {
           fullContent.style.display = "block";
           summary.style.display = "none";
           this.textContent = "Leer menos";
@@ -286,19 +306,20 @@ document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll(".toggle-comments-btn").forEach((button) => {
       button.addEventListener("click", function () {
         const postId = this.getAttribute("data-id");
-        const contenidoComentario = document.getElementById(`comment-list-${postId}`);
+        const contenidoComentario = document.getElementById(
+          `comment-list-${postId}`
+        );
 
         fetch(api1 + `/obtenerComentarios/${postId}`)
           .then((response) => response.json())
           .then((data) => {
-
             console.log(data);
 
             contenidoComentario.innerHTML = "";
 
             data.datos.forEach((comentario) => {
-
-              const nombreUsuario = comentario.usuario_id?.userName || "Usuario desconocido";
+              const nombreUsuario =
+                comentario.usuario_id?.userName || "Usuario desconocido";
 
               contenidoComentario.innerHTML += `
                 <div class="comment-item">
@@ -307,8 +328,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 </div>`;
             });
           })
-          .catch((error) => console.error("Error al procesar los comentarios:", error));
-
+          .catch((error) =>
+            console.error("Error al procesar los comentarios:", error)
+          );
 
         if (contenidoComentario.style.display === "none") {
           contenidoComentario.style.display = "block";
@@ -319,7 +341,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       });
     });
-
   }
 
   function asignarEventosFormulario() {
@@ -430,7 +451,10 @@ document.addEventListener("DOMContentLoaded", function () {
         const fullContent = document.getElementById(`full-content-${postId}`);
         const summary = document.getElementById(`summary-${postId}`);
 
-        if (fullContent.style.display === "none" || fullContent.style.display === "") {
+        if (
+          fullContent.style.display === "none" ||
+          fullContent.style.display === ""
+        ) {
           fullContent.style.display = "block";
           summary.style.display = "none";
           this.textContent = "Leer menos";
@@ -445,19 +469,20 @@ document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll(".toggle-comments-btn").forEach((button) => {
       button.addEventListener("click", function () {
         const postId = this.getAttribute("data-id");
-        const contenidoComentario = document.getElementById(`comment-list-${postId}`);
+        const contenidoComentario = document.getElementById(
+          `comment-list-${postId}`
+        );
 
         fetch(api1 + `/obtenerComentarios/${postId}`)
           .then((response) => response.json())
           .then((data) => {
-
             console.log(data);
 
             contenidoComentario.innerHTML = "";
 
             data.datos.forEach((comentario) => {
-
-              const nombreUsuario = comentario.usuario_id?.userName || "Usuario desconocido";
+              const nombreUsuario =
+                comentario.usuario_id?.userName || "Usuario desconocido";
 
               contenidoComentario.innerHTML += `
                 <div class="comment-item">
@@ -466,8 +491,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 </div>`;
             });
           })
-          .catch((error) => console.error("Error al procesar los comentarios:", error));
-
+          .catch((error) =>
+            console.error("Error al procesar los comentarios:", error)
+          );
 
         if (contenidoComentario.style.display === "none") {
           contenidoComentario.style.display = "block";
@@ -478,7 +504,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       });
     });
-
   }
 
   function asignarEventosFormulario() {
@@ -531,7 +556,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 });
-
 
 document.addEventListener("DOMContentLoaded", function () {
   document
@@ -590,7 +614,10 @@ document.addEventListener("DOMContentLoaded", function () {
         const fullContent = document.getElementById(`full-content-${postId}`);
         const summary = document.getElementById(`summary-${postId}`);
 
-        if (fullContent.style.display === "none" || fullContent.style.display === "") {
+        if (
+          fullContent.style.display === "none" ||
+          fullContent.style.display === ""
+        ) {
           fullContent.style.display = "block";
           summary.style.display = "none";
           this.textContent = "Leer menos";
@@ -605,19 +632,20 @@ document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll(".toggle-comments-btn").forEach((button) => {
       button.addEventListener("click", function () {
         const postId = this.getAttribute("data-id");
-        const contenidoComentario = document.getElementById(`comment-list-${postId}`);
+        const contenidoComentario = document.getElementById(
+          `comment-list-${postId}`
+        );
 
         fetch(api1 + `/obtenerComentarios/${postId}`)
           .then((response) => response.json())
           .then((data) => {
-
             console.log(data);
 
             contenidoComentario.innerHTML = "";
 
             data.datos.forEach((comentario) => {
-
-              const nombreUsuario = comentario.usuario_id?.userName || "Usuario desconocido";
+              const nombreUsuario =
+                comentario.usuario_id?.userName || "Usuario desconocido";
 
               contenidoComentario.innerHTML += `
                 <div class="comment-item">
@@ -626,8 +654,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 </div>`;
             });
           })
-          .catch((error) => console.error("Error al procesar los comentarios:", error));
-
+          .catch((error) =>
+            console.error("Error al procesar los comentarios:", error)
+          );
 
         if (contenidoComentario.style.display === "none") {
           contenidoComentario.style.display = "block";
@@ -638,7 +667,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       });
     });
-
   }
 
   function asignarEventosFormulario() {
@@ -737,7 +765,6 @@ document.addEventListener("DOMContentLoaded", function () {
             `;
           });
 
-
           asignarEventosPublicaciones();
           asignarEventosFormulario();
         });
@@ -750,7 +777,10 @@ document.addEventListener("DOMContentLoaded", function () {
         const fullContent = document.getElementById(`full-content-${postId}`);
         const summary = document.getElementById(`summary-${postId}`);
 
-        if (fullContent.style.display === "none" || fullContent.style.display === "") {
+        if (
+          fullContent.style.display === "none" ||
+          fullContent.style.display === ""
+        ) {
           fullContent.style.display = "block";
           summary.style.display = "none";
           this.textContent = "Leer menos";
@@ -765,19 +795,20 @@ document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll(".toggle-comments-btn").forEach((button) => {
       button.addEventListener("click", function () {
         const postId = this.getAttribute("data-id");
-        const contenidoComentario = document.getElementById(`comment-list-${postId}`);
+        const contenidoComentario = document.getElementById(
+          `comment-list-${postId}`
+        );
 
         fetch(api1 + `/obtenerComentarios/${postId}`)
           .then((response) => response.json())
           .then((data) => {
-
             console.log(data);
 
             contenidoComentario.innerHTML = "";
 
             data.datos.forEach((comentario) => {
-
-              const nombreUsuario = comentario.usuario_id?.userName || "Usuario desconocido";
+              const nombreUsuario =
+                comentario.usuario_id?.userName || "Usuario desconocido";
 
               contenidoComentario.innerHTML += `
                 <div class="comment-item">
@@ -786,8 +817,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 </div>`;
             });
           })
-          .catch((error) => console.error("Error al procesar los comentarios:", error));
-
+          .catch((error) =>
+            console.error("Error al procesar los comentarios:", error)
+          );
 
         if (contenidoComentario.style.display === "none") {
           contenidoComentario.style.display = "block";
@@ -798,7 +830,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       });
     });
-
   }
 
   function asignarEventosFormulario() {
@@ -851,5 +882,3 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 });
-
-
