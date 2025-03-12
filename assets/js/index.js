@@ -6,32 +6,7 @@ let botonValue = "";
 let idPostForComments = "";
 let idUsuario = "";
 
-// Funcionalidad del tema
 
-const button = document.getElementById("theme-toggle");
-
-// Cambiar tema de la pagina
-const currentTheme = localStorage.getItem("theme") || "light";
-
-if (currentTheme === "dark") {
-  document.body.classList.add("dark-theme");
-  button.classList.add("dark-theme");
-}
-
-// Esto es para el tema
-
-button.addEventListener("click", () => {
-  // Alternar el tema
-  if (document.body.classList.contains("dark-theme")) {
-    document.body.classList.remove("dark-theme");
-    button.classList.remove("dark-theme");
-    localStorage.setItem("theme", "light");
-  } else {
-    document.body.classList.add("dark-theme");
-    button.classList.add("dark-theme");
-    localStorage.setItem("theme", "dark");
-  }
-});
 
 //Listar todos
 
@@ -194,65 +169,65 @@ document.addEventListener("DOMContentLoaded", function () {
             fetch(`${api2}/listarPorId/${idEditar}`)
               .then((res) => res.json())
               .then((data) => {
-                console.log("Datos recibidos de la API:", data);
+                console.log("Datos", data);
 
-                if (data.Comentario && data.Comentario.length > 0) {
-                  const comentario = data.Comentario[0];
+                const comentario = data.Comentario[0];
 
-                  const inputComentario = document.getElementById("comentarioUpdate");
-                  inputComentario.value = comentario.contenido_comentario;
+                const inputComentario = document.getElementById("comentarioUpdate");
 
-                  modalInstance.show();
+                inputComentario.value = comentario.contenido_comentario;
 
-
-                  const formComentario = document.getElementById("frmComentario");
+                modalInstance.show();
 
 
-                  formComentario.removeEventListener("submit", actualizarComentario);
+                const formComentario = document.getElementById("frmComentario");
+
+                console.log("sds");
+                //formComentario.removeEventListener("submit", actualizarComentario);
 
 
-                  formComentario.addEventListener("submit", function actualizarComentario(event) {
-                    event.preventDefault();
+                formComentario.addEventListener("submit", function actualizarComentario(event) {
+                  event.preventDefault();
+                  let datos = 'nada';
 
-                    console.log("Enviando actualización...");
 
-                    fetch(api2 + "/actualizarPorId", {
-                      method: "PUT",
-                      headers: {
-                        "Content-Type": "application/json",
-                      },
-                      body: JSON.stringify({
-                        contenido_comentario: inputComentario.value, // Tomar el valor actualizado
-                      }),
+                  fetch(`${api2}/actualizarPorId/${idEditar}`, {
+                    method: "PUT",
+                    headers: {
+                      "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                      contenido_comentario: inputComentario.value, // Tomar el valor actualizado
+                    }),
+                  })
+                    .then((res) => res.json())
+                    .then((res) => {
+                      console.log("Respuesta del servidor:", res);
+
+                      if (res.estado === true) {
+                        Swal.fire({
+                          position: "top",
+                          title: "¡Comentario editado correctamente!",
+                          icon: "success",
+                          text: res.mensaje,
+                          showConfirmButton: false,
+                          timer: 1500,
+                        });
+
+                        modalInstance.hide(); // Cerrar modal 
+                      } else {
+                        Swal.fire({
+                          title: "Error!",
+                          icon: "error",
+                          text: res.mensaje,
+                        });
+                      }
                     })
-                      .then((res) => res.json())
-                      .then((res) => {
-                        console.log("Respuesta del servidor:", res);
+                    .catch((error) => console.error("Error al actualizar el comentario:", error));
 
-                        if (res.estado === true) {
-                          Swal.fire({
-                            position: "top",
-                            title: "¡Comentario editado correctamente!",
-                            icon: "success",
-                            text: res.mensaje,
-                            showConfirmButton: false,
-                            timer: 1500,
-                          });
+                  formComentario.reset(); // Limpiar f
+                });
 
-                          modalInstance.hide(); // Cerrar modal 
-                        } else {
-                          Swal.fire({
-                            title: "Error!",
-                            icon: "error",
-                            text: res.mensaje,
-                          });
-                        }
-                      })
-                      .catch((error) => console.error("Error al actualizar el comentario:", error));
-
-                    formComentario.reset(); // Limpiar f
-                  });
-                }
               })
               .catch((error) => console.error("Error al obtener el comentario:", error));
           }
@@ -322,7 +297,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 //Botones categorias
-
+/*
 document.addEventListener("DOMContentLoaded", function () {
   document
     .getElementById("btnFutbol")
@@ -812,6 +787,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
+
 document.addEventListener("DOMContentLoaded", function () {
   document
     .getElementById("btnAtletismo")
@@ -973,4 +949,4 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     });
   }
-});
+}); */
