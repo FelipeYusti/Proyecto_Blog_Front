@@ -151,22 +151,21 @@ document.addEventListener("DOMContentLoaded", function () {
           })
           .catch((error) => console.error("Error al procesar los comentarios:", error));
 
-        // Event delegation para los botones de editar y eliminar
+
         contenidoComentario.addEventListener("click", (event) => {
+          // ELIMINAR COMENTARIO
           if (event.target.closest(".btnEliminar")) {
             const idEliminar = event.target.closest(".btnEliminar").dataset.id;
 
             console.log("Comentario a eliminar:", idEliminar);
 
-            fetch(`${api2}/borrarPorId/${idEliminar}`, {
-              method: "DELETE",
-            })
-              .then((data) => data.json())
+            fetch(`${api2}/borrarPorId/${idEliminar}`, { method: "DELETE" })
+              .then((res) => res.json())
               .then((data) => {
                 if (data.estado === true) {
                   Swal.fire({
                     position: "top",
-                    title: "Se elimino correctamente el comentario!",
+                    title: "Se eliminó correctamente el comentario!",
                     icon: "success",
                     text: data.mensaje,
                     showConfirmButton: false,
@@ -183,32 +182,82 @@ document.addEventListener("DOMContentLoaded", function () {
               .catch((error) => console.error("Error al eliminar el comentario:", error));
           }
 
+          // EDITAR COMENTARIO
+          if (event.target.closest(".btnEditar")) {
+            const idEditar = event.target.closest(".btnEditar").dataset.id;
+            console.log("Editar comentario:", idEditar);
 
-          contenidoComentario.addEventListener("click", (event) => {
-            if (event.target.closest(".btnEditar")) {
-              const idEditar = event.target.closest(".btnEditar").dataset.id;
+            // Obtener la instancia 
+            const modalElement = document.getElementById("editComentario");
+            const modalInstance = new bootstrap.Modal(modalElement);
 
-              console.log("Editar comentario:", idEditar);
+            fetch(`${api2}/listarPorId/${idEditar}`)
+              .then((res) => res.json())
+              .then((data) => {
+                console.log("Datos recibidos de la API:", data);
 
-              fetch(`${api2}/listarPorId/${idEditar}`)
-                .then((data) => data.json())
-                .then((data) => {
-                  console.log(data);
+                if (data.Comentario && data.Comentario.length > 0) {
                   const comentario = data.Comentario[0];
 
-                  document.getElementById("comentarioUpdate").value = comentario.contenido_comentario;
+                  const inputComentario = document.getElementById("comentarioUpdate");
+                  inputComentario.value = comentario.contenido_comentario;
 
-                  let modal = new bootstrap.Modal(document.getElementById("editComentario"));
-                  modal.show();
-                })
-                .catch((error) => {
-                  console.error("Error al obtener el comentario:", error);
-                });
+                  modalInstance.show();
 
-            }
-          });
 
+                  const formComentario = document.getElementById("frmComentario");
+
+
+                  formComentario.removeEventListener("submit", actualizarComentario);
+
+
+                  formComentario.addEventListener("submit", function actualizarComentario(event) {
+                    event.preventDefault();
+
+                    console.log("Enviando actualización...");
+
+                    fetch(api2 + "/actualizarPorId", {
+                      method: "PUT",
+                      headers: {
+                        "Content-Type": "application/json",
+                      },
+                      body: JSON.stringify({
+                        contenido_comentario: inputComentario.value, // Tomar el valor actualizado
+                      }),
+                    })
+                      .then((res) => res.json())
+                      .then((res) => {
+                        console.log("Respuesta del servidor:", res);
+
+                        if (res.estado === true) {
+                          Swal.fire({
+                            position: "top",
+                            title: "¡Comentario editado correctamente!",
+                            icon: "success",
+                            text: res.mensaje,
+                            showConfirmButton: false,
+                            timer: 1500,
+                          });
+
+                          modalInstance.hide(); // Cerrar modal 
+                        } else {
+                          Swal.fire({
+                            title: "Error!",
+                            icon: "error",
+                            text: res.mensaje,
+                          });
+                        }
+                      })
+                      .catch((error) => console.error("Error al actualizar el comentario:", error));
+
+                    formComentario.reset(); // Limpiar f
+                  });
+                }
+              })
+              .catch((error) => console.error("Error al obtener el comentario:", error));
+          }
         });
+
 
         if (contenidoComentario.style.display === "none") {
           contenidoComentario.style.display = "block";
